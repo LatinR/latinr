@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1553782468137.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1125825801",
+    "id" : "61BBC713",
+    "lastKnownWriteTime" : 1553785184,
+    "last_content_update" : 1553785184434,
+    "path" : "~/Documents/latinr/inst/rmarkdown/templates/latinr_article/resources/template.tex",
+    "project_path" : "inst/rmarkdown/templates/latinr_article/resources/template.tex",
+    "properties" : {
+        "cursorPosition" : "12,14",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "tex"
+}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1553784532406.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "5FF7E2C9",
+    "lastKnownWriteTime" : 1553782751,
+    "last_content_update" : 1553782751,
+    "path" : "~/Documents/latinr/R/latinr_article.R",
+    "project_path" : "R/latinr_article.R",
+    "properties" : {
+        "cursorPosition" : "5,14",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

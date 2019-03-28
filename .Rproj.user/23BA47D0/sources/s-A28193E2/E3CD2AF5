@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1553782474705.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E3CD2AF5",
+    "lastKnownWriteTime" : 1553785187,
+    "last_content_update" : 1553785187711,
+    "path" : "~/Documents/latinr/inst/rmarkdown/templates/latinr_article/skeleton/skeleton.Rmd",
+    "project_path" : "inst/rmarkdown/templates/latinr_article/skeleton/skeleton.Rmd",
+    "properties" : {
+        "cursorPosition" : "29,8",
+        "scrollLine" : "19"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
