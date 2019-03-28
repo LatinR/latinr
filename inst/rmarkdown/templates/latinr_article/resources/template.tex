@@ -19,13 +19,12 @@ $if(submission)$
 $else$
 \author{
 $for(authors)$
-$authors.name$\inst{$authors.affil$} $if(orcidID)$\orcidID{$orcidID$}$endif$
-$sep$\and
+$authors.firstname$ $authors.lastname$\inst{$authors.affil$} $sep$\and
 $endfor$
 }
 $if(authorrunning)$ \authorrunning{$authorrunning$} $endif$
 
-\institute{$for(affiliations)$$affiliations.name$ $if(affiliations.email)$\email{$affiliations.email$}\\ $endif$ $if(affiliations.url)$\url{$affiliations.url$}\\ $endif$ $sep$\and $endfor$}
+\institute{$for(affiliations)$$affiliations.name$$sep$\and $endfor$}
 $endif$
 
 %

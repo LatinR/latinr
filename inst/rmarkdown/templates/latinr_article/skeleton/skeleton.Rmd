@@ -4,23 +4,25 @@ lang: spanish
 title: "Título"
 titlerunning: "Título"
 authors:
-  - name: Primer Autor
+  - firstname: Primer 
+    lastname: Autor
     affil: 1
-    orcid: "0000-1111-2222-3333"
-  - name: Segundo Autor
+    email: "lncs@springer.com"
+    corresponding: true
+    speaker: true
+  - firstname: Segundo 
+    lastname: Autor
     affil: 1
-  - name: Tercer Autor
+  - firstname: Tercer
+    lastname: Autor
     affil: "1, 2"
 affiliations:
   - number: 1
-    name: "Princeton University, Princeton NJ 08544, USA"
+    name: "Princeton University"
   - number: 2
-    name: "Springer Heidelberg, Tiergartenstr. 17, 69121 Heidelberg, Germany"
-    email: "lncs@springer.com"
-    url: "http://www.springer.com/gp/computer-science/lncs"
+    name: "Springer Heidelberg"
   - number: 3
-    name: "ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany"
-    email: "lncs@uni-heidelberg.de"
+    name: "ABC Institute, Rupert-Karls-University Heidelberg"
 # authorrunning: P. Author et al.
 keywords: 
   - "Hasta"
