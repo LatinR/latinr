@@ -1,37 +1,47 @@
 ---
 submission: false
+type: oral   #oral, poster, table
 lang: spanish
 title: "Título"
 titlerunning: "Título"
 authors:
-  - firstname: Primer 
+  - firstname: Primer
     lastname: Autor
-    affil: 1
-    email: "lncs@springer.com"
+    email: lncs@springer.com
+    country: Argentina
+    affil: "1"
+    webpage: "google.com"  # Optional 
     corresponding: true
     speaker: true
   - firstname: Segundo 
     lastname: Autor
-    affil: 1
-  - firstname: Tercer
-    lastname: Autor
+    email: lncs@springer.com
+    country: Argentina
     affil: "1, 2"
+    corresponding: false
+    speaker: false    
 affiliations:
   - number: 1
     name: "Princeton University"
   - number: 2
     name: "Springer Heidelberg"
-  - number: 3
-    name: "ABC Institute, Rupert-Karls-University Heidelberg"
 # authorrunning: P. Author et al.
 keywords: 
-  - "Hasta"
+  - "Mínimo"
   - "tres"
   - "palabras clave"
 bibliography: latinRtest.bib
 output: 
     latinr::latinr_article
+params: 
+  check_is_error: TRUE
 ---
+
+```{r submission-checks, echo=FALSE}
+# Runs some basic checks in metadata. To disable, set check_is_error to FALSE
+latinr::latinr_checks(rmarkdown::metadata, params$check_is_error)
+```
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -40,7 +50,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ## R Markdown
 
 
-á ñ
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
