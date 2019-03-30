@@ -1,4 +1,4 @@
-\documentclass[runningheads]{llncs}
+\documentclass[runningheads,$lang$]{llncs}
 %
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
@@ -24,17 +24,17 @@ $endfor$
 }
 $if(authorrunning)$ \authorrunning{$authorrunning$} $endif$
 
-\institute{$for(affiliations)$$affiliations.name$$sep$\and $endfor$}
+\institute{$for(affiliations)$$affiliations$$sep$\and $endfor$}
 $endif$
 
 %
 \maketitle
 %
-\begin{abstract}
-$if(abstract)$ $abstract$ $endif$ 
+
+$if(abstract)$\begin{abstract} $abstract$ \end{abstract}$endif$ 
 
 \keywords{$for(keywords)$ $keywords$ $sep$\and $endfor$}
-\end{abstract}
+
 
 $body$
 %
