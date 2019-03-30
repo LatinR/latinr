@@ -10,4 +10,5 @@ Description: Facilitates creating submissions to the LatinR confference.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports: utils, rmarkdown, knitr, yaml, tinytex, xfun
 RoxygenNote: 6.1.1

@@ -2,3 +2,4 @@
 
 export(latinr_article)
 export(latinr_checks)
+import(rmarkdown)

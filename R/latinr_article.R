@@ -77,6 +77,7 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
   invisible(metadata)
 }
 
+#' @import rmarkdown
 pdf_document_format <- function(
   format, template = find_resource(format, 'template.tex'), ...
 ) {
