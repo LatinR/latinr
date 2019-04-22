@@ -42,7 +42,7 @@
 % languages
 \let\switcht@@therlang\relax
 \def\ds@deutsch{\def\switcht@@therlang{\switcht@deutsch}}
-\def\ds@francais{\def\switcht@@therlang{\switcht@francais}}
+\def\ds@español{\def\switcht@@therlang{\switcht@español}}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 
@@ -116,23 +116,23 @@
 % Names of theorem like environments are already defined
 % but must be translated if another language is chosen
 %
-% French section
-\def\switcht@francais{%\typeout{On parle francais.}%
- \def\abstractname{R\'esum\'e.}%
- \def\ackname{Remerciements.}%
- \def\andname{et}%
- \def\lastandname{ et}%
- \def\appendixname{Appendice}
- \def\chaptername{Chapitre}%
- \def\claimname{Pr\'etention}%
- \def\conjecturename{Hypoth\`ese}%
- \def\contentsname{Table des mati\`eres}%
- \def\corollaryname{Corollaire}%
- \def\definitionname{D\'efinition}%
+% Spanish section
+\def\switcht@español{%\typeout{On parle francais.}%
+ \def\abstractname{Resumen}%
+ \def\ackname{Agradecimientos.}%
+ \def\andname{y}%
+ \def\lastandname{ y}%
+ \def\appendixname{Apéndice}
+ \def\chaptername{Capítulo}%
+ \def\claimname{Afirmación}%
+ \def\conjecturename{Hipótesis}%
+ \def\contentsname{Tabla de contenidos}%
+ \def\corollaryname{Corolario}%
+ \def\definitionname{Definición}%
  \def\examplename{Exemple}%
  \def\exercisename{Exercice}%
  \def\figurename{Fig.}%
- \def\keywordname{{\bf Mots-cl\'e:}}
+ \def\keywordname{{\bf Palabras clave:}}
  \def\indexname{Index}
  \def\lemmaname{Lemme}%
  \def\contriblistname{Liste des contributeurs}
@@ -882,7 +882,7 @@ to0pt{\kern0.55\wd0\vrule height0.45\ht0\hss}\box0}}}}
 \AtBeginDocument{\@ifundefined{url}{\def\url#1{#1}}{}%
 \@ifpackageloaded{babel}{%
 \@ifundefined{extrasenglish}{}{\addto\extrasenglish{\switcht@albion}}%
-\@ifundefined{extrasfrench}{}{\addto\extrasfrenchb{\switcht@francais}}%
+\@ifundefined{extrasspanishb}{}{\addto\extrasspanishb{\switcht@español}}%
 \@ifundefined{extrasgerman}{}{\addto\extrasgerman{\switcht@deutsch}}%
 \@ifundefined{extrasngerman}{}{\addto\extrasngerman{\switcht@deutsch}}%
 }{\switcht@@therlang}%

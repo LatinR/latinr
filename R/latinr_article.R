@@ -2,12 +2,12 @@
 #'
 #' @export
 latinr_article <- function(
-  ..., keep_tex = TRUE, citation_package = 'natbib',
-  highlight = NULL, md_extensions = c("-autolink_bare_uris", "-auto_identifiers")
+    ..., keep_tex = TRUE, highlight = NULL, citation_package = "none", 
+    latex_engine = "xelatex"
 ) {
   pdf_document_format(
     "latinr_article", keep_tex = keep_tex, highlight = highlight,
-    citation_package = citation_package, md_extensions = md_extensions, ...
+    citation_package = citation_package, latex_engine = latex_engine, ...
   )
 }
 
