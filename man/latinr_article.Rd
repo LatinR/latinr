@@ -4,9 +4,23 @@
 \alias{latinr_article}
 \title{R Markdown output format for submissions to LatinR}
 \usage{
-latinr_article(..., keep_tex = TRUE, citation_package = "natbib",
-  highlight = NULL, md_extensions = c("-autolink_bare_uris",
-  "-auto_identifiers"))
+latinr_article(..., keep_tex = TRUE, highlight = NULL,
+  citation_package = "none", latex_engine = "xelatex")
+}
+\arguments{
+\item{...}{Arguments passed to \code{pdf_document()}.}
+
+\item{keep_tex}{Keep the intermediate tex file used in the conversion to PDF}
+
+\item{highlight}{Syntax highlighting style. Supported styles include
+"default", "tango", "pygments", "kate", "monochrome", "espresso",
+"zenburn", and "haddock". Pass \code{NULL} to prevent syntax highlighting.}
+
+\item{citation_package}{The LaTeX package to process citations, \code{natbib}
+or \code{biblatex}. Use \code{none} if neither package is to be used.}
+
+\item{latex_engine}{LaTeX engine for producing PDF output. Options are
+"pdflatex", "lualatex", and "xelatex".}
 }
 \description{
 R Markdown output format for submissions to LatinR

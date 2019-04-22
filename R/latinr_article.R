@@ -1,5 +1,7 @@
 #' R Markdown output format for submissions to LatinR
 #'
+#' @inheritParams rmarkdown::pdf_document
+#'
 #' @export
 latinr_article <- function(
     ..., keep_tex = TRUE, highlight = NULL, citation_package = "none", 
@@ -11,7 +13,11 @@ latinr_article <- function(
   )
 }
 
-
+#' Checks that metadata is ok
+#' 
+#' @param metadata yaml metadata
+#' @param check_is_error whether to treat fails as errors or only warnings
+#' 
 #' @export
 latinr_checks <- function(metadata, check_is_error = TRUE) {
   authors <- metadata$authors
