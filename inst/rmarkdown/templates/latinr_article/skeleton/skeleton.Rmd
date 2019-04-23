@@ -19,7 +19,6 @@ authors:
     affil: ["Princeton University", "Springer Heidelberg"]
     corresponding: false
     speaker: false  
-# authorrunning: P. Author et al.
 keywords: 
   - "Mínimo"
   - "tres"
@@ -28,7 +27,7 @@ bibliography: latinRtest.bib
 biblio-style: apalike-es   
 output: 
     latinr::latinr_article:
-      keep_tex: true
+      keep_tex: false
 params: 
   check_is_error: TRUE
 ---
