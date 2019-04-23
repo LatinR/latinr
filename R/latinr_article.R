@@ -4,7 +4,7 @@
 #'
 #' @export
 latinr_article <- function(
-    ..., keep_tex = TRUE, highlight = "default", citation_package = "none", 
+    ..., keep_tex = FALSE, highlight = "default", citation_package = "none", 
     latex_engine = "xelatex"
 ) {
   pdf_document_format(
