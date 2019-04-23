@@ -7,18 +7,14 @@
 
 %% load any required packages here
 
-\usepackage[$language$]{babel}
+\usepackage[spanish]{babel}
 \usepackage{graphicx}
 
-\hypersetup{pdftitle={$title$},
-            pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$}}
+\hypersetup{pdftitle={Título},
+            pdfkeywords={Mínimo; tres; palabras clave}}
 
 
-$if(submission)$
-\hypersetup{pdfauthor=Anónimo}
-$else$
-\hypersetup{pdfauthor={$for(authors)$$authors.firstname$ $authors.lastname$$sep$, $endfor$}}
-$endif$
+\hypersetup{pdfauthor={Primer Autor, Segundo Autor}}
 
 
 %\usepackage[hidelinks]{hyperref}
@@ -70,48 +66,78 @@ $endif$
 \begin{document}
 
 %% do not edit, for illustration only
-\sectionhead{$title$}
+\sectionhead{Título}
 \year{2019}
 
 \begin{article}
 
-\title{$title$}
+\title{Título}
 
-$if(submission)$
-\author{Anónimo}
-$else$
 \author{
-$for(authors)$
-$authors.firstname$ $authors.lastname$ $sep$, 
-$endfor$
-}
-$endif$
+Primer Autor , 
+Segundo Autor }
 
 \maketitle
 
-$if(abstract)$
-\abstract{
-$abstract$
+
+%\keywords{ Mínimo \and  tres \and  palabras clave }
+
+\hypertarget{r-markdown}{%
+\section{R Markdown}\label{r-markdown}}
+
+This is an R Markdown document. Markdown is a simple formatting syntax
+for authoring HTML, PDF, and MS Word documents. For more details on
+using R Markdown see \url{http://rmarkdown.rstudio.com}.
+
+When you click the \textbf{Knit} button a document will be generated
+that includes both content as well as the output of any embedded R code
+chunks within the document. You can embed an R code chunk like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(cars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+\end{verbatim}
+
+\hypertarget{including-plots}{%
+\section{Including Plots}\label{including-plots}}
+
+You can also embed plots, for example:
+
+\includegraphics{skeleton_files/figure-latex/pressure-1.pdf}
+
+Note that the \texttt{echo\ =\ FALSE} parameter was added to the code
+chunk to prevent printing of the R code that generated the plot.(Nuncio,
+Luis, and Yuan 2011)
+
+\hypertarget{refs}{}
+\leavevmode\hypertarget{ref-Nuncio2011}{}%
+Nuncio, M., Alvarinho J. Luis, and X. Yuan. 2011. ``Topographic
+meandering of Antarctic Circumpolar Current and Antarctic Circumpolar
+Wave in the ice-ocean-atmosphere system.'' \emph{Geophysical Research
+Letters} 38 (13): 1--5. \url{https://doi.org/10.1029/2011GL046898}.
+
+
+
+\address{Primer Autor\\
+Princeton University\\
+\email{lncs@springer.com}}
+
+\address{Segundo Autor\\
+Princeton University\\Springer Heidelberg\\
 }
-$endif$
-
-%\keywords{$for(keywords)$ $keywords$ $sep$\and $endfor$}
-
-$body$
 
 
-$if(submission)$
-
-$else$
-
-$for(authors)$
-\address{$authors.firstname$ $authors.lastname$\\
-$for(authors.affil)$$authors.affil$$sep$\\$endfor$\\
-$if(authors.corresponding)$\email{$authors.email$}$endif$}
-
-$endfor$
-
-$endif$
 
 
 \end{article}

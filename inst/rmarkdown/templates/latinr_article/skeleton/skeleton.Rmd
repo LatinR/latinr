@@ -1,15 +1,14 @@
 ---
 submission: false
 type: oral   #oral, poster, table
-lang: español
+language: spanish
 title: "Título"
-titlerunning: "Título"
 authors:
   - firstname: Primer
     lastname: Autor
     email: lncs@springer.com
     country: Argentina
-    affil: "1"
+    affil: "Princeton University"
     webpage: "google.com"  # Optional 
     corresponding: true
     speaker: true
@@ -17,20 +16,19 @@ authors:
     lastname: Autor
     email: lncs@springer.com
     country: Argentina
-    affil: "1, 2"
+    affil: ["Princeton University", "Springer Heidelberg"]
     corresponding: false
-    speaker: false    
-affiliations:
-  - "Princeton University"
-  - "Springer Heidelberg"
+    speaker: false  
 # authorrunning: P. Author et al.
 keywords: 
   - "Mínimo"
   - "tres"
   - "palabras clave"
 bibliography: latinRtest.bib
+biblio-style: apalike-es   
 output: 
-    latinr::latinr_article
+    latinr::latinr_article:
+      keep_tex: true
 params: 
   check_is_error: TRUE
 ---

@@ -16,15 +16,15 @@
 % document class \pkg{report}. 
 
 \RequirePackage{geometry}
-\geometry{a4paper, 
-   textwidth=14cm, top=1cm, bottom=1cm,
+\geometry{letterpaper, 
+   textwidth=17cm, top=1cm, bottom=1cm,
    includehead,includefoot,centering,
    footskip=1.5cm}
 \raggedbottom
 
 \RequirePackage{fancyhdr}
 \fancyhead{}
-\fancyheadoffset{2cm} 
+\fancyheadoffset{0.5cm} 
 \fancyhead[L]{\textsc{\RJ@sectionhead}}
 \fancyhead[R]{\thepage}
 \fancyfoot{}
@@ -47,7 +47,7 @@
 \RequirePackage[T1]{fontenc}
 
 \RequirePackage[hyphens]{url}
-\RequirePackage[pagebackref]{hyperref}
+\RequirePackage[pagebackref,pdftitle="hi"]{hyperref}
 \renewcommand{\backref}[1]{[p#1]}
 
 % Dark blue colour for all links
