@@ -1,16 +1,13 @@
-\documentclass[a4paper]{report}
+\documentclass[runningheads]{llncs}
+%
+\usepackage{graphicx}
 %\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{RJournal}
-\usepackage{amsmath,amssymb,array}
-\usepackage{booktabs}
+%\usepackage{natbib}
 
-%% load any required packages here
 
 \usepackage[$language$]{babel}
-\usepackage{graphicx}
 
-%\usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks]{hyperref}
 
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage{color}
@@ -54,54 +51,87 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 
-\newtheorem{definition}{Definición}
+\def\abstractname{Abstracat.}
+\def\ackname{Acknowledgement.}
+\def\andname{and}
+\def\lastandname{\unskip, and}
+\def\appendixname{Appendix}
+\def\chaptername{Chapter}
+\def\claimname{Claim}
+\def\conjecturename{Conjecture}
+\def\contentsname{Table of Contents}
+\def\corollaryname{Corollary}
+\def\definitionname{Definición}
+\def\examplename{Example}
+\def\exercisename{Exercise}
+\def\figurename{Fig.}
+\def\keywordname{{\bf Palabras clave:}}
+\def\indexname{Index}
+\def\lemmaname{Lemma}
+\def\contriblistname{List of Contributors}
+\def\listfigurename{List of Figures}
+\def\listtablename{List of Tables}
+\def\mailname{{\it Correspondence to\/}:}
+\def\noteaddname{Note added in proof}
+\def\notename{Note}
+\def\partname{Part}
+\def\problemname{Problem}
+\def\proofname{Proof}
+\def\propertyname{Property}
+\def\propositionname{Proposition}
+\def\questionname{Question}
+\def\remarkname{Remark}
+\def\seename{see}
+\def\solutionname{Solution}
+\def\subclassname{{\it Subject Classifications\/}:}
+\def\tablename{Table}
+\def\theoremname{Theorem}
+
+
 
 \begin{document}
 
-%% do not edit, for illustration only
-\sectionhead{$title$}
-\year{2019}
-
-\begin{article}
-
+%
 \title{$title$}
-
+%
+$if(titlerunning)$ \titlerunning{$titlerunning$} $endif$
+%
 $if(submission)$
-\author{Anónimo}
+\author{Anonimous}
 $else$
 \author{
 $for(authors)$
-$authors.firstname$ $authors.lastname$ $sep$\and
+$authors.firstname$ $authors.lastname$\inst{$authors.affil$} $sep$\and
 $endfor$
 }
+$if(authorrunning)$ \authorrunning{$authorrunning$} $endif$
+
+\institute{$for(affiliations)$$affiliations$$sep$\and $endfor$}
 $endif$
 
+%\addbibresource{}
 \maketitle
+%
 
-$if(abstract)$
-\abstract{
-$abstract$
-}
-$endif$
+$if(abstract)$\begin{abstract} $abstract$ \end{abstract}$endif$ 
 
-%\keywords{$for(keywords)$ $keywords$ $sep$\and $endfor$}
+\keywords{$for(keywords)$ $keywords$ $sep$\and $endfor$}
+
 
 $body$
+%
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
+% \bibliographystyle{splncs04}
 
+% \bibliography{mybibliography}
+%
 
-$if(submission)$
+%$if(bibliography)$
+%\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+%$endif$
 
-$else$
-
-$for(authors)$
-\address{$authors.firstname$ $authors.lastname$\\
-$authors.affil$$if(authors.corresponding)$\\
-\email{$authors.email$}$endif$}
-$endfor$
-
-$endif$
-
-
-\end{article}
 \end{document}
-

@@ -9,7 +9,8 @@ latinr_article <- function(
 ) {
   pdf_document_format(
     "latinr_article", keep_tex = keep_tex, highlight = highlight,
-    citation_package = citation_package, latex_engine = latex_engine, ...
+    citation_package = citation_package, latex_engine = latex_engine, 
+    md_extensions = c("-autolink_bare_uris"),...
   )
 }
 
