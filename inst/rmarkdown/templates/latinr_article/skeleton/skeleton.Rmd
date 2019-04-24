@@ -4,12 +4,12 @@ type: oral   #oral, poster, table
 language: spanish
 title: "Título"
 authors:
-  - firstname: Primer
-    lastname: Autor
+  - first_name: Primer
+    last_name: Autor
     email: lncs@springer.com
     country: Argentina
-    affil: "Princeton University"
-    webpage: "google.com"  # Optional 
+    Affiliation: "Princeton University"
+    url: "google.com"  # Optional 
     corresponding: true
     speaker: true
   - firstname: Segundo 

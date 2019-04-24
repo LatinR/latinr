@@ -22,7 +22,7 @@ latinr_article <- function(
 #' @export
 latinr_checks <- function(metadata, check_is_error = TRUE) {
   authors <- metadata$authors
-  required <- c("lastname", "email", "country", "affil")
+  required <- c("last_name", "email", "country", "Affiliation")
   
   missing_fields <- lapply(seq_along(authors), function(a) {
     person <- authors[[a]]

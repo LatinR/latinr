@@ -1,0 +1,196 @@
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="track"
+
+240492
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="a"
+
+21838528
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="first_name1"
+
+Elio
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="last_name1"
+
+Camp
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="email1"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="country1"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="Affiliation1"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="url1"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="corresponding1"
+
+on
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="speaker"
+
+1
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="first_name2"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="last_name2"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="email2"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="country2"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="Affiliation2"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="url2"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="corresponding2"
+
+on
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="first_name3"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="last_name3"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="email3"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="country3"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="Affiliation3"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="url3"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="corresponding3"
+
+on
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="first_name4"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="last_name4"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="email4"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="country4"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="Affiliation4"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="url4"
+
+
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="corresponding4"
+
+on
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="title"
+
+asasd
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="keywords"
+
+asdasd
+asdasd
+asdasfds
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281909
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281910
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281911
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281912
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281913
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281914
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281915
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281916
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281917
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281918
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281919
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="topic"
+
+281920
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="field44396"
+
+162533
+-----------------------------15446075827322774522002851
+Content-Disposition: form-data; name="upload90642"; filename="metamer.pdf"
+Content-Type: application/pdf
+
+%PDF-1.5
+%äðíø
+15 0 obj
+<</Filter/FlateDecode/Length 3225>>
+stream
+xÚ­ÙÜ¶ñ=_Á¼q«fÈ²¼rÙe+¶µyÊäÃÖ´yxl¼þúô3\%®JIµ@£»Ñã}òÂ?åéþ^Ùx_<zz§¼"(²(ó?z÷QäYáÅiå©÷xþ§ÿáî_ßÐ4:T8-tT

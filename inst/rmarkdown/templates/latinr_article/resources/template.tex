@@ -17,7 +17,7 @@
 $if(submission)$
 \hypersetup{pdfauthor=Anónimo}
 $else$
-\hypersetup{pdfauthor={$for(authors)$$authors.firstname$ $authors.lastname$$sep$, $endfor$}}
+\hypersetup{pdfauthor={$for(authors)$$authors.first_name$ $authors.last_name$$sep$, $endfor$}}
 $endif$
 
 
@@ -82,7 +82,7 @@ $if(submission)$
 $else$
 \author{
 $for(authors)$
-$authors.firstname$ $authors.lastname$ $sep$, 
+$authors.first_name$ $authors.last_name$ $sep$, 
 $endfor$
 }
 $endif$
@@ -105,8 +105,8 @@ $if(submission)$
 $else$
 
 $for(authors)$
-\address{$authors.firstname$ $authors.lastname$\\
-$for(authors.affil)$$authors.affil$$sep$\\$endfor$\\
+\address{$authors.first_name$ $authors.last_name$\\
+$for(authors.Affiliation)$$authors.Affiliation$$sep$\\$endfor$\\
 $if(authors.corresponding)$\email{$authors.email$}$endif$}
 
 $endfor$
