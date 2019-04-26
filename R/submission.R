@@ -30,7 +30,8 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   latinr_checks(metadata, check_is_error = TRUE)
   
   message("Rendering file")
-  pdf_location <- rmarkdown::render(rmd, quiet = TRUE)
+  pdf_location <- rmarkdown::render(rmd, quiet = TRUE, 
+                                    params = list(check_is_error = TRUE))
   
   keep <- c("title", "keywords", "field44396")
   metadata$field44396 <- switch(metadata$type,

@@ -95,7 +95,7 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
     if (isTRUE(check_is_error)) {
       stop(text)
     } else {
-      warning(text)
+      cat(text)
     }
   } 
   invisible(metadata)
