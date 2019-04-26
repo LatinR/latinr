@@ -4,7 +4,8 @@
 \alias{latinr_submit}
 \title{Submit an article to LatinR}
 \usage{
-latinr_submit(rmd = NULL, user = latinr_default_user_get())
+latinr_submit(rmd = list.files(getwd(), pattern = ".Rmd"),
+  user = latinr_default_user_get(), user_check = TRUE)
 }
 \description{
 Submit an article to LatinR
