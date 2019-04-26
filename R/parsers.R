@@ -1,6 +1,11 @@
 
 
 parse_authors <- function(authors) {
+  if (length(authors) < 3) {
+    authors <- parse_authors(c(authors, .blank_author))
+    return(authors)
+  }
+
   authors <- lapply(seq_along(authors), function(n) {
     author <- authors[[n]]
     if (isTRUE(author$corresponding)) {
@@ -15,8 +20,6 @@ parse_authors <- function(authors) {
       author$speaker <- NULL
     }
     
-    author$country <- country_code(author$country)
-    
     names <- names(author) 
     
     names[names != "speaker"] <- paste0(names[names != "speaker"],
@@ -28,6 +31,13 @@ parse_authors <- function(authors) {
   )
   return(unlist(authors, FALSE))
 }
+
+.blank_author <- list(list(first_name = "",
+       last_name = "",
+       email = "", 
+       country = "",
+       Affiliation = "",
+       url = ""))
 
 
 

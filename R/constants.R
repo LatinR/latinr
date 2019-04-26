@@ -53,7 +53,7 @@ latinr_url <- function(what) {
 
 
 .make_boundary <- function() {
-  "---------------------------15446075827322774522002851"
+  "latinr"
 }
 
 .submission_track <- "240492"
