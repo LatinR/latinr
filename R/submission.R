@@ -1,13 +1,36 @@
-latinr_submit <- function(rmd = NULL, user = latinr_default_user_get()) {
+#' Submit an article to LatinR
+#' 
+#' @export
+latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"), 
+                          user = latinr_default_user_get(), 
+                          user_check = TRUE) {
+  if (length(rmd) == 0) {
+    stop("No Rmd file selected")
+  }
+  
+  if (length(rmd) > 1) {
+    stop("Multiple Rmd files selected")
+  }
   
   metadata <- rmarkdown::yaml_front_matter(rmd)
   
+  if (user_check) {
+    print_form_data(metadata)
+    cat("Source file:", rmd, "\n\n")
+    
+    cat("Upload with username:", user, "\n\n")
+    
+    ok <- readline("Is the above information correct? (y/n) ")  
+    if (tolower(ok) != "y") {
+      return(invisible(NULL))
+    }
+  }
+
   message("Checking metadata")
   latinr_checks(metadata, check_is_error = TRUE)
   
-  
   message("Rendering file")
-  pdf_location <- rmarkdown::render(rmd)
+  pdf_location <- rmarkdown::render(rmd, quiet = TRUE)
   
   keep <- c("title", "keywords", "field44396")
   metadata$field44396 <- switch(metadata$type,
@@ -78,4 +101,5 @@ latinr_submit <- function(rmd = NULL, user = latinr_default_user_get()) {
     # 
     return(invisible(submit_url))
   }
+  message("Submitted")
 }

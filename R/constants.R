@@ -65,3 +65,5 @@ rmd_location <- "~/Documents/latinR2019/metamer.Rmd"
 pdf_location <- "~/Documents/latinR2019/metamer.pdf"
 zip_location <- "~/Documents/latinR2019/metamer.zip"
 
+
+.types <- c("oral", "poster", "table")

@@ -84,10 +84,10 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
     errors <- c(errors, "At least three keywords needed")
   }
   
-  types <- c("oral", "poster", "table")
-  if (!(metadata$type %in% types)) {
+  
+  if (!(metadata$type %in% .types)) {
     errors <- c(errors, paste0("Submission type mus be ", 
-                               knitr::combine_words(types, and = " or ")))
+                               knitr::combine_words(.types, and = " or ")))
   }
   
   if (length(errors) != 0) {
