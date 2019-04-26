@@ -31,12 +31,6 @@ parse_authors <- function(authors) {
 
 
 
-# to do
-country_code <- function(country) {
-  country
-}
-
-
 
 content_from_list <- function(list) {
   
@@ -44,11 +38,11 @@ content_from_list <- function(list) {
     content_field(names(list)[n], list[[n]])
   })
   
-  return(paste0(c(fields, paste0("--", make_boundary(), "--")), collapse = "\n"))
+  return(paste0(c(fields, paste0("--", .make_boundary(), "--")), collapse = "\n"))
 }
 
 
-content_field <- function(name, contents, boundary = make_boundary()) {
+content_field <- function(name, contents, boundary = .make_boundary()) {
   head <- paste0("--", boundary)
   
   subhead <- paste0('Content-Disposition: form-data; name="', name, '"')
@@ -56,6 +50,7 @@ content_field <- function(name, contents, boundary = make_boundary()) {
   if (name == "upload90642") {
     subhead <- paste0(subhead, '; filename="', basename(contents),'"\nContent-Type: application/pdf')
     # todo: upload file??
+    contents <- .parse_pdf(contents)
   }
   
   if (missing(contents)) {
@@ -68,14 +63,17 @@ content_field <- function(name, contents, boundary = make_boundary()) {
 }
 
 
-topics <- seq(281909, 281920)
-
-make_boundary <- function() {
-  "---------------------------15446075827322774522002851"
+.parse_topics <- function(topics) {
+  topics  <- .topics_number[topics]
+  topics <- as.list(topics)
+  names(topics) <- rep("topic", length(topics))
+  return(topics)
 }
 
-.submission_track <- "240492"
-.submission_a <- "21838528"
 
-rmd_location <- "~/Documents/latinR2019/metamer.Rmd"
-pdf_location <- "~/Documents/latinR2019/metamer.pdf"
+.parse_pdf <- function(pdf) {
+  zip <- tempfile()
+  a <- R.utils::gzip(pdf, destname = zip, remove = FALSE)
+  zip <- paste0(suppressWarnings(readLines(zip)), collapse = "\n")
+  return(zip)
+}

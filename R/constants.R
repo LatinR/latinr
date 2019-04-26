@@ -36,3 +36,32 @@ latinr_url <- function(what) {
          stop("Unrecognised what")
   )
 }
+
+.topics <- c("Aplicaciones de R en distintas disciplinas de la academia y la industria",
+             "Desarrollo de nuevos paquetes R",
+             "Uso de R en la enseñanza",
+             "Investigación reproducible usando R",
+             "Aprendizaje automático con R",
+             "Análisis de redes con R",
+             "Uso de R en conjunto con otros lenguajes de programación y plataformas",
+             "Uso innovador de paquetes R existentes",
+             "Iniciativas innovadoras para el aprendizaje de R",
+             "Análisis de grandes datos con R",
+             "Visualización de datos con R",
+             "Uso de R para análisis de datos abiertos")
+
+
+
+.make_boundary <- function() {
+  "---------------------------15446075827322774522002851"
+}
+
+.submission_track <- "240492"
+.submission_a <- "21838528"
+
+.topics_number <- seq(281909, 281920)
+
+rmd_location <- "~/Documents/latinR2019/metamer.Rmd"
+pdf_location <- "~/Documents/latinR2019/metamer.pdf"
+zip_location <- "~/Documents/latinR2019/metamer.zip"
+

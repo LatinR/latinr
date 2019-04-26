@@ -3,11 +3,13 @@ submission: false
 type: oral   #oral, poster, table
 language: spanish
 title: "Título"
+topics: [1, 2]
+# Para la lista de tópicos usá latinr::latinr_topics()
 authors:
   - first_name: Primer
     last_name: Autor
     email: lncs@springer.com
-    country: Argentina
+    country: ar  # lista en latinr::latinr_countries()
     Affiliation: "Princeton University"
     url: "google.com"  # Optional 
     corresponding: true
@@ -15,7 +17,7 @@ authors:
   - firstname: Segundo 
     lastname: Autor
     email: lncs@springer.com
-    country: Argentina
+    country: ar
     affil: ["Princeton University", "Springer Heidelberg"]
     corresponding: false
     speaker: false  
