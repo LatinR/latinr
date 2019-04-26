@@ -13,14 +13,13 @@ authors:
     Affiliation: "Princeton University"
     url: "google.com"  # Optional 
     corresponding: true
-    speaker: true
-  - firstname: Segundo 
-    lastname: Autor
+  - first_name: Segundo 
+    last_name: Autor
     email: lncs@springer.com
     country: ar
-    affil: ["Princeton University", "Springer Heidelberg"]
+    Affiliation: ["Princeton University", "Springer Heidelberg"]
     corresponding: false
-    speaker: false  
+speaker: 1  # sólo un autor puede estar como speaker
 keywords: 
   - "Mínimo"
   - "tres"
@@ -31,10 +30,10 @@ output:
     latinr::latinr_article:
       keep_tex: false
 params: 
-  check_is_error: TRUE
+  check_is_error: FALSE
 ---
 
-```{r submission-checks, echo=FALSE}
+```{r submission-checks, echo=FALSE, warning=TRUE}
 # Runs some basic checks in metadata. To disable, set check_is_error to FALSE
 latinr::latinr_checks(rmarkdown::metadata, params$check_is_error)
 ```

@@ -1,6 +1,13 @@
-latinr_submit <- function(..., user = latinr_default_user_get()) {
-  ### Parse YAML
-  metadata <- rmarkdown::yaml_front_matter(rmd_location)
+latinr_submit <- function(rmd = NULL, user = latinr_default_user_get()) {
+  
+  metadata <- rmarkdown::yaml_front_matter(rmd)
+  
+  message("Checking metadata")
+  latinr_checks(metadata, check_is_error = TRUE)
+  
+  
+  message("Rendering file")
+  pdf_location <- rmarkdown::render(rmd)
   
   keep <- c("title", "keywords", "field44396")
   metadata$field44396 <- switch(metadata$type,
@@ -13,90 +20,62 @@ latinr_submit <- function(..., user = latinr_default_user_get()) {
   topics <- .parse_topics(metadata$topics)
   metadata <- metadata[names(metadata) %in% keep]
   metadata <- c(metadata[keep[-3]], topics, metadata[keep[3]])
-  metadata$upload90642 <- pdf_location
+  # metadata$upload90642 <- pdf_location
   
-  form <- c(authors, metadata)
+  form_data <- c(authors, metadata)
   
   ### Submit form
   password <- latinr_password_get(user)
-  url <- latinr_url("submit")
-  
-  # ok_user <- latinr_password_check(user, password)
-  # 
-  # if (!isTRUE(ok_user[["ok"]])) {
-  #   stop(ok_user, ".", sep = "")
-  # }
-  # 
-  # cookie <- ok_user[["cookie"]]
-  # cookie <- cookie[cookie[["name"]] == "cool1", "value"]
   
   url <- latinr_url("latinr")
-  
+  message("Logging in")
   session <- rvest::html_session(url)
   login_form <- rvest::html_form(session)[[1]]
   login_form <- rvest::set_values(login_form, 
                                   name = user, 
                                   password = password)
-  session <- rvest::submit_form(session, login_form)
-  session <- rvest::follow_link(session, "enter as an author")
+  session <- suppressMessages(rvest::submit_form(session, login_form))
+  try_session <- try(rvest::follow_link(session, "enter as an author"), silent = TRUE)
+  
+  if (inherits(try_session, "try-error")) {
+    session <- suppressMessages(rvest::follow_link(session, "author"))
+    a <- httr::parse_url(session$url)$query$a
+    session <- rvest::jump_to(session, paste0("https://easychair.org/conferences/submission_new.cgi", "?a=", a))
+  } else {
+    session <- try_session
+  }
   
   submit_form <- rvest::html_form(session)[[1]]
-  
+  form <- submit_form
+  submit_form <- form
+  message("Submitting")
   # modified set_values
-  submit_form <- set_values(submit_form, 
-                            first_name1 = "Elio",
-                            last_name1 = "CAmpi",
-                            email1 = "elio@gmail.com",
-                            country1 = "ar",
-                            Affiliation1 = "CIMA",
-                            corresponding1 = TRUE,
-                            speaker = TRUE,
-                            title = "TITULO",
-                            keywords = "una \n palabra \n clave",
-                            topic = "281910",
-                            field44396 = "162532",
-                            upload90642 = pdf_location
-  )
+  form_data$form <- submit_form
+  submit_form <- do.call(set_values, form_data)
   
   
-  session <- rvest::submit_form(session, submit_form)
-  
-  
-  # start <- list(track = .submission_track, 
-  #               a = httr::parse_url(session$url)$query$a)
-  # end <- list(end = "1", x = "1", button = "submit")
-  # form <- c(start, authors, metadata, end)
-  # 
-  # form$title <- NULL
-  # 
-  # form <- content_from_list(form)
-  # 
-  # 
-  # cookie <- httr::cookies(session)
-  # cookie <- paste0("cool1=", cookie[cookie[["name"]] == "cool1", "value"])
-  # 
-  # head <- httr::add_headers(
-  #   "Accept-Encoding" = "gzip, deflate, br",
-  #   "Referer" = session[["url"]],
-  #   "User-Agent" = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0",
-  #   "Content-Type" =  paste0("multipart/form-data; boundary=", .make_boundary()),
-  #   "Content-Length" = nchar(form, "bytes"),
-  #   "Connection" = "keep-alive",
-  #   "Cookie" = cookie
-  # )
-  # if (FALSE){
-  # after_post <- httr::POST(latinr_url("submit"),
-  #                          session$config, 
-  #                          head,
-  #                          body = form,
-  #                          handle = session$handle)
-  #  
-  # after_post <- rvest:::request_POST(session, 
-  #                      latinr_url("submit"),
-  #                      
-  #                      config(referer = session$url),
-  #                      user_agent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"),
-  #                      body = form)
-  #  
-  # }
+  if (FALSE) {
+    message("Submitting")
+    # session <- rvest::submit_form(session, submit_form)
+    # 
+    # submission <- httr::parse_url(session$url)$query$submission
+    # submission <- strsplit(submission, ";", fixed = TRUE)[[1]]
+    # a <- strsplit(submission[3], "=", fixed = TRUE)[[1]][2]
+    # submission <-  submission[1]
+    submit_url <- paste0("https://easychair.org/conferences/submission_upload.cgi?",
+           "submission=", submission, ";",
+           "track=", .submission_track, ";",
+           "a=", a)
+    message(paste0("Go to this url to check your submission and upload your file:\n",
+                   submit_url))
+    # browseURL(paste0("https://easychair.org/conferences/submission?submission=4405891;a=21863896"))
+    # 
+    # session <- rvest::jump_to(session,
+    #                           paste0("https://easychair.org/conferences/submission_upload.cgi?",
+    #                                  "submission=", submission, ";",
+    #                                  "track=", .submission_track, ";",
+    #                                  "a=", a))
+    # 
+    return(invisible(submit_url))
+  }
 }

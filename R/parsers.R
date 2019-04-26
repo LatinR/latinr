@@ -1,29 +1,17 @@
 
 
 parse_authors <- function(authors) {
-  if (length(authors) < 3) {
-    authors <- parse_authors(c(authors, .blank_author))
-    return(authors)
-  }
-
   authors <- lapply(seq_along(authors), function(n) {
     author <- authors[[n]]
     if (isTRUE(author$corresponding)) {
       author$corresponding <- "on"
     } else {
-      authors$corresponding <- NULL
-    }
-    
-    if (isTRUE(author$speaker)) {
-      author$speaker <- 1
-    } else {
-      author$speaker <- NULL
+      authors$corresponding <- "off"
     }
     
     names <- names(author) 
     
-    names[names != "speaker"] <- paste0(names[names != "speaker"],
-                                        n)
+    names <- paste0(names, n)
     names(author) <- names
     
     return(author)

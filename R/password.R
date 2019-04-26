@@ -24,6 +24,13 @@ latinr_password_get <- function(user) {
                    username = user)
 }
 
+latinr_password_remove <- function(user) {
+  keyring::key_delete(service = latinr_service(), 
+                      username = user)
+}
+
+
+
 
 latinr_password_check <- function(user, password) {
   url <- latinr_url(what = "verify")

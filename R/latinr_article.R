@@ -4,8 +4,8 @@
 #'
 #' @export
 latinr_article <- function(
-    ..., keep_tex = FALSE, highlight = "default", citation_package = "none", 
-    latex_engine = "xelatex"
+  ..., keep_tex = FALSE, highlight = "default", citation_package = "none", 
+  latex_engine = "xelatex"
 ) {
   pdf_document_format(
     "latinr_article", keep_tex = keep_tex, highlight = highlight,
@@ -41,13 +41,21 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
   errors <- unlist(missing_fields)
   errors <- errors[nchar(errors) != 0]
   
-  n_speakers <- Reduce("+", lapply(authors, function(a) isTRUE(a$speaker)))
   
-  if (n_speakers == 0) {
+  if (is.null(metadata$speaker)) {
     errors <- c(errors, "Missing speaker")
-  } else if (n_speakers > 1) {
-    errors <- c(errors, "Multiple speakers")
+  } else {
+    if (length(metadata$speaker) > 1) {
+      errors <- c(errors, "Only one author can be marked as speaker")
+    }
+    
+    
+    if (metadata$speaker > length(authors)) {
+      errors <- c(errors, paste0("Speaker cannot be '", metadata$speaker,
+                                 "' if there are ", length(authors), " authors"))
+    }
   }
+ 
   
   n_correspondence <- Reduce("+", lapply(authors, function(a) isTRUE(a$corresponding)))
   
@@ -57,6 +65,15 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
   
   if (is.null(metadata$title)) {
     errors <- c(errors, "Missing title")
+  }
+  
+  if (is.null(metadata$topics)) {
+    errors <- c(errors, "Missing topics")
+  } else {
+    if (any(metadata$topics > length(.topics))) {
+      errors <- c(errors, paste0("Invalid topic detected, must be a number between 1 and ",
+                                 lenght(.topics)))
+    }
   }
   
   keywords <- metadata$keywords
@@ -72,7 +89,7 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
     errors <- c(errors, paste0("Submission type mus be ", 
                                knitr::combine_words(types, and = " or ")))
   }
-
+  
   if (length(errors) != 0) {
     text <- paste0("\nFound the following errors:\n * ", paste(errors, collapse = "\n * "))
     if (isTRUE(check_is_error)) {

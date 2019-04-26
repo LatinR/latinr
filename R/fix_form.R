@@ -36,7 +36,7 @@ set_values <- function(form, ...) {
 
 set_checkbox <- function(form, values) {
   idx <- which(unlist(lapply(form$fields, function(x) { x$name %in% names(values) })))
-  
+  # browser()
   for (i in unname(idx)) {
     if (!is.null(form$fields[[i]]$value) && (form$fields[[i]]$value %in% values))
       form$fields[[i]]$checked <- "true"
@@ -46,7 +46,7 @@ set_checkbox <- function(form, values) {
 
 set_radio <- function(form, values) {
   idx <- which(unlist(lapply(form$fields, function(x) { x$name %in% names(values) })))
-  
+  # browser()
   for (i in unname(idx)) {
     if (!is.null(form$fields[[i]]$value)) {
       if (form$fields[[i]]$value %in% values)
