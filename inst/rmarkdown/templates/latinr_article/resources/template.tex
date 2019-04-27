@@ -14,7 +14,7 @@
             pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$}}
 
 
-$if(submission)$
+$if(params.submission)$
 \hypersetup{pdfauthor=Anónimo}
 $else$
 \hypersetup{pdfauthor={$for(authors)$$authors.first_name$ $authors.last_name$$sep$, $endfor$}}
@@ -77,7 +77,7 @@ $endif$
 
 \title{$title$}
 
-$if(submission)$
+$if(params.submission)$
 \author{Anónimo}
 $else$
 \author{
@@ -100,7 +100,7 @@ $endif$
 $body$
 
 
-$if(submission)$
+$if(params.submissiom)$
 
 $else$
 

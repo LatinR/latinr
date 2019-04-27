@@ -1,5 +1,4 @@
 ---
-submission: false
 type: oral   #oral, poster, table
 language: spanish
 title: "Título"
@@ -31,6 +30,7 @@ output:
       keep_tex: false
 params: 
   check_is_error: FALSE
+  submission: FALSE
 ---
 
 ```{r submission-checks, echo=FALSE, warning=TRUE}
