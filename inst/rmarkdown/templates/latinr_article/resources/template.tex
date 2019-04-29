@@ -65,7 +65,14 @@ $endif$
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 
-\newtheorem{definition}{Definición}
+\providecommand{\keywords}[1]{\noindent\textbf{Palabras clave:} #1}
+
+$if(header_includes)$ 
+$for(header_includes)$ 
+$header_includes$ 
+
+$endfor$
+$endif$
 
 \begin{document}
 
@@ -95,12 +102,12 @@ $abstract$
 }
 $endif$
 
-%\keywords{$for(keywords)$ $keywords$ $sep$\and $endfor$}
+\keywords{$for(keywords)$ $keywords$ $sep$ - $endfor$}
 
 $body$
 
 
-$if(params.submissiom)$
+$if(params.submission)$
 
 $else$
 
