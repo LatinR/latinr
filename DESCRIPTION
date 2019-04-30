@@ -12,12 +12,9 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 2.10)
 Imports: 
-    utils,
     rmarkdown,
     knitr,
-    yaml,
-    tinytex,
-    xfun,
     httr,
-    keyring
+    keyring,
+    rvest
 RoxygenNote: 6.1.1

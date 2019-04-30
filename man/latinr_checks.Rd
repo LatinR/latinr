@@ -7,10 +7,11 @@
 latinr_checks(metadata, check_is_error = TRUE)
 }
 \arguments{
-\item{metadata}{yaml metadata}
+\item{metadata}{yaml metadata.}
 
-\item{check_is_error}{whether to treat fails as errors or only warnings}
+\item{check_is_error}{whether to treat fails as errors or only warnings
+useful during developement).}
 }
 \description{
-Checks that metadata is ok
+Does basics checks on metadata so that it adheres to submission guidelines.
 }

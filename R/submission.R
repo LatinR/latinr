@@ -1,9 +1,25 @@
 #' Submit an article to LatinR
 #' 
+#' @param rmd rmarkdown source file of the submission.
+#' @param pdf pdf file for submission. If `NULL`, the source file will be 
+#' rendered and used as file (recommended).
+#' @param user user used for uplad.
+#' @param check whether to ask for user confirmation (recommended).
+#' 
+#' @details 
+#' It is highly recommended to use the latinr template that comes with 
+#' this package and to use `pdf = NULL` as this will ensure that the publication
+#' adheres to the correct format and is appropriately anonymised.
+#' 
+#' It's also very important to check that your submission has gone through 
+#' correctly.
+#' 
+#' 
 #' @export
 latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"), 
+                          pdf = NULL,
                           user = latinr_default_user_get(), 
-                          user_check = TRUE) {
+                          check = TRUE) {
   if (length(rmd) == 0) {
     stop("No Rmd file selected")
   }
@@ -14,7 +30,7 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   
   metadata <- rmarkdown::yaml_front_matter(rmd)
   
-  if (user_check) {
+  if (check) {
     print_form_data(metadata)
     cat("Source file:", rmd, "\n\n")
     
@@ -25,14 +41,16 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
       return(invisible(NULL))
     }
   }
-
+  
   message("Checking metadata")
   latinr_checks(metadata, check_is_error = TRUE)
   
   message("Rendering file")
-  pdf_location <- rmarkdown::render(rmd, quiet = TRUE, 
-                                    params = list(check_is_error = TRUE,
-                                                  submission = TRUE))
+  if (is.null(pdf)) {
+    pdf <- rmarkdown::render(rmd, quiet = TRUE, 
+                             params = list(check_is_error = TRUE,
+                                           submission = TRUE))
+  }
   
   keep <- c("title", "keywords", "field44396")
   metadata$field44396 <- switch(metadata$type,
@@ -40,18 +58,18 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
                                 poster = "162532",
                                 table  = "162533")
   
-  authors <- parse_authors(metadata$authors)
+  authors <- .parse_authors(metadata$authors)
   metadata$keywords <- paste0(metadata$keywords, collapse = "\n")
   topics <- .parse_topics(metadata$topics)
   metadata <- metadata[names(metadata) %in% keep]
   metadata <- c(metadata[keep[-3]], topics, metadata[keep[3]])
   
-  form_data <- c(authors, metadata, list(upload90642 = httr::upload_file(pdf_location)))
+  form_data <- c(authors, metadata, list(upload90642 = httr::upload_file(pdf)))
   
   ### Submit form
   password <- latinr_password_get(user)
   
-  url <- latinr_url("latinr")
+  url <- .latinr_url("latinr")
   message("Logging in")
   session <- rvest::html_session(url)
   login_form <- rvest::html_form(session)[[1]]
@@ -74,32 +92,30 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   message("Submitting")
   form_data$form <- submit_form
   submit_form <- do.call(set_values, form_data)
-
-  if (FALSE) {
-    message("Submitting")
-    session <- rvest::submit_form(session, submit_form)
-    
-    title <- rvest::html_text(rvest::html_nodes(session, "title")[[1]])
-
-    if (substr(title, 1, 21) != "LatinR2019 Submission") {
-      stop("There was an error, but I'm still not smart enought to know which :(!\n",
-           "Check your submission details and if you still get this error, submit manually", 
-           paste0(" at ", latinr_url("latinr")))
-    } 
-    message(title)
-    
-    submission <- httr::parse_url(session$url)$query$submission
-    submission <- strsplit(submission, ";", fixed = TRUE)[[1]]
-    a <- strsplit(submission[3], "=", fixed = TRUE)[[1]][2]
-    submission <-  submission[1]
-    submit_url <- paste0("https://easychair.org/conferences/submission_upload.cgi?",
-           "submission=", submission, ";",
-           "track=", .submission_track, ";",
-           "a=", a)
-    message(paste0("Go to this url to check your submission:\n",
-                   submit_url))
-    
-    return(invisible(submit_url))
-  }
+  
+  session <- suppressMessages(rvest::submit_form(session, submit_form))
+  
+  title <- rvest::html_text(rvest::html_nodes(session, "title")[[1]])
+  
+  if (substr(title, 1, 21) != "LatinR2019 Submission") {
+    stop("There was an error, but I'm still not smart enought to know which :(!\n",
+         "Check your submission details and if you still get this error, submit manually", 
+         paste0(" at ", .latinr_url("latinr")))
+  } 
+  message(title)
+  
+  submission <- httr::parse_url(session$url)$query$submission
+  submission <- strsplit(submission, ";", fixed = TRUE)[[1]]
+  a <- strsplit(submission[3], "=", fixed = TRUE)[[1]][2]
+  submission <-  submission[1]
+  submit_url <- paste0("https://easychair.org/conferences/submission_upload.cgi?",
+                       "submission=", submission, ";",
+                       "track=", .submission_track, ";",
+                       "a=", a)
+  message(paste0("Go to this url to check your submission:\n",
+                 submit_url))
+  
+  return(invisible(submit_url))
+  
   message("Submitted")
 }

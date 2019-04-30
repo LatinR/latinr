@@ -1,5 +1,6 @@
 #' R Markdown output format for submissions to LatinR
-#'
+#' 
+#' 
 #' @inheritParams rmarkdown::pdf_document
 #'
 #' @export
@@ -16,8 +17,11 @@ latinr_article <- function(
 
 #' Checks that metadata is ok
 #' 
-#' @param metadata yaml metadata
+#' Does basics checks on metadata so that it adheres to submission guidelines. 
+#' 
+#' @param metadata yaml metadata.
 #' @param check_is_error whether to treat fails as errors or only warnings
+#' useful during developement).
 #' 
 #' @export
 latinr_checks <- function(metadata, check_is_error = TRUE) {
@@ -72,7 +76,7 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
   } else {
     if (any(metadata$topics > length(.topics))) {
       errors <- c(errors, paste0("Invalid topic detected, must be a number between 1 and ",
-                                 lenght(.topics)))
+                                 length(.topics)))
     }
   }
   
@@ -101,7 +105,7 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
   invisible(metadata)
 }
 
-#' @import rmarkdown
+
 pdf_document_format <- function(
   format, template = find_resource(format, 'template.tex'), ...
 ) {

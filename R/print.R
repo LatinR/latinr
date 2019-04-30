@@ -15,7 +15,7 @@ print_form_data <- function(metadata) {
            cat("Author #", n, ":\n", sep = "")
            cat("  Name:        ", author$first_name, author$last_name, "\n")
            cat("  Email:       ", author$email, "\n")
-           cat("  Affil:       ", author$Affiliation, "\n")
+           cat("  Affiliation: ", author$Affiliation, "\n")
            cat("  Country:     ", rownames(.countries)[.countries$countries == author$country], "\n")
            cat("  Corresonding:", author$corresponding, "\n\n")
          })

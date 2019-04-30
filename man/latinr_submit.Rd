@@ -4,9 +4,27 @@
 \alias{latinr_submit}
 \title{Submit an article to LatinR}
 \usage{
-latinr_submit(rmd = list.files(getwd(), pattern = ".Rmd"),
-  user = latinr_default_user_get(), user_check = TRUE)
+latinr_submit(rmd = list.files(getwd(), pattern = ".Rmd"), pdf = NULL,
+  user = latinr_default_user_get(), check = TRUE)
+}
+\arguments{
+\item{rmd}{rmarkdown source file of the submission.}
+
+\item{pdf}{pdf file for submission. If `NULL`, the source file will be 
+rendered and used as file (recommended).}
+
+\item{user}{user used for uplad.}
+
+\item{check}{whether to ask for user confirmation (recommended).}
 }
 \description{
 Submit an article to LatinR
+}
+\details{
+It is highly recommended to use the latinr template that comes with 
+this package and to use `pdf = NULL` as this will ensure that the publication
+adheres to the correct format and is appropriately anonymised.
+
+It's also very important to check that your submission has gone through 
+correctly.
 }

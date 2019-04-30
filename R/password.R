@@ -1,3 +1,23 @@
+#' Password management
+#' 
+#' Functions to save, get and remove latinr passwords. 
+#' 
+#' @param user username. 
+#' @param password password
+#' @param check_credentials whether to validate credentials before saving them 
+#' (recommended)
+#' 
+#' @details 
+#' By default, `latinr_password_set()` will try to validate the credentials to 
+#' so that only valid credentials are saved. However, this needs an active 
+#' internet conection. Use `check_credentials = FALSE` if you are sure your 
+#' credentials are correct but don't have internet. 
+#' @name latinr_password
+#' @aliases latinr_password_remove latinr_password_get latinr_password_set
+NULL
+
+
+#' @describeIn latinr_password Set a new user/password combination
 #' @export
 latinr_password_set <- function(user, password, check_credentials = TRUE) {
   bypass_message <-  " or use `check_credentials = FALSE` to bypass login verification"
@@ -17,7 +37,7 @@ latinr_password_set <- function(user, password, check_credentials = TRUE) {
   return(invisible(user))
 }
 
-
+#' @describeIn latinr_password Get password for an user.
 #' @export
 latinr_password_get <- function(user) {
   keyring::keyring_unlock()
@@ -25,6 +45,7 @@ latinr_password_get <- function(user) {
                    username = user)
 }
 
+#' @describeIn latinr_password Remove an user/password combination.
 #' @export
 latinr_password_remove <- function(user) {
   keyring::key_delete(service = latinr_service(), 
@@ -35,7 +56,7 @@ latinr_password_remove <- function(user) {
 
 
 latinr_password_check <- function(user, password) {
-  url <- latinr_url(what = "verify")
+  url <- .latinr_url(what = "verify")
   response <- try(httr::POST(url, body = list(name = user, 
                                               password = password)),
                   silent = TRUE)
