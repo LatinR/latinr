@@ -1,3 +1,4 @@
+#' @export
 latinr_password_set <- function(user, password, check_credentials = TRUE) {
   bypass_message <-  " or use `check_credentials = FALSE` to bypass login verification"
   ok_user <- !check_credentials
@@ -17,13 +18,14 @@ latinr_password_set <- function(user, password, check_credentials = TRUE) {
 }
 
 
-
+#' @export
 latinr_password_get <- function(user) {
   keyring::keyring_unlock()
   keyring::key_get(service = latinr_service(), 
                    username = user)
 }
 
+#' @export
 latinr_password_remove <- function(user) {
   keyring::key_delete(service = latinr_service(), 
                       username = user)
