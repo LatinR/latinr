@@ -45,9 +45,8 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   topics <- .parse_topics(metadata$topics)
   metadata <- metadata[names(metadata) %in% keep]
   metadata <- c(metadata[keep[-3]], topics, metadata[keep[3]])
-  # metadata$upload90642 <- pdf_location
   
-  form_data <- c(authors, metadata)
+  form_data <- c(authors, metadata, list(upload90642 = httr::upload_file(pdf_location)))
   
   ### Submit form
   password <- latinr_password_get(user)
@@ -71,36 +70,35 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   }
   
   submit_form <- rvest::html_form(session)[[1]]
-  form <- submit_form
-  submit_form <- form
+  
   message("Submitting")
-  # modified set_values
   form_data$form <- submit_form
   submit_form <- do.call(set_values, form_data)
-  
-  
+
   if (FALSE) {
     message("Submitting")
-    # session <- rvest::submit_form(session, submit_form)
-    # 
-    # submission <- httr::parse_url(session$url)$query$submission
-    # submission <- strsplit(submission, ";", fixed = TRUE)[[1]]
-    # a <- strsplit(submission[3], "=", fixed = TRUE)[[1]][2]
-    # submission <-  submission[1]
+    session <- rvest::submit_form(session, submit_form)
+    
+    title <- rvest::html_text(rvest::html_nodes(session, "title")[[1]])
+
+    if (substr(title, 1, 21) != "LatinR2019 Submission") {
+      stop("There was an error, but I'm still not smart enought to know which :(!\n",
+           "Check your submission details and if you still get this error, submit manually", 
+           paste0(" at ", latinr_url("latinr")))
+    } 
+    message(title)
+    
+    submission <- httr::parse_url(session$url)$query$submission
+    submission <- strsplit(submission, ";", fixed = TRUE)[[1]]
+    a <- strsplit(submission[3], "=", fixed = TRUE)[[1]][2]
+    submission <-  submission[1]
     submit_url <- paste0("https://easychair.org/conferences/submission_upload.cgi?",
            "submission=", submission, ";",
            "track=", .submission_track, ";",
            "a=", a)
-    message(paste0("Go to this url to check your submission and upload your file:\n",
+    message(paste0("Go to this url to check your submission:\n",
                    submit_url))
-    # browseURL(paste0("https://easychair.org/conferences/submission?submission=4405891;a=21863896"))
-    # 
-    # session <- rvest::jump_to(session,
-    #                           paste0("https://easychair.org/conferences/submission_upload.cgi?",
-    #                                  "submission=", submission, ";",
-    #                                  "track=", .submission_track, ";",
-    #                                  "a=", a))
-    # 
+    
     return(invisible(submit_url))
   }
   message("Submitted")
