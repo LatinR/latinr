@@ -30,7 +30,7 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   
   metadata <- rmarkdown::yaml_front_matter(rmd)
   
-  if (check) {
+  if (isTRUE(check)) {
     print_form_data(metadata)
     cat("Source file:", rmd, "\n\n")
     
@@ -50,6 +50,16 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
     pdf <- rmarkdown::render(rmd, quiet = TRUE, 
                              params = list(check_is_error = TRUE,
                                            submission = TRUE))
+  }
+  
+  if (isTRUE(check)) {
+    pdf_open <- readline("Press (enter) to check your submission file. ")
+    file.show(pdf)
+    pdf_ok <- readline("Send this file? (y/n) ")
+    
+    if (tolower(pdf_pok) != "y") {
+      return(invisible(NULL))
+    }
   }
   
   keep <- c("title", "keywords", "field44396")

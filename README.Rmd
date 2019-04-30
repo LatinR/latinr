@@ -1,0 +1,46 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# latinr <img src="man/figures/logo.png" align="right"/>
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+latinr is a package that streamlines the submission process to the  [LatinR](http://latin-r.com/) conference. 
+
+## Installation
+
+You can install latinrfrom [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("latinr/latinr")
+```
+
+## Usage
+
+If you are going to submit an article to LatinR, you will need to create an user at `r latinr:::.latinr_url("latinr")`. Then, use
+
+```r
+latinr:::latinr_password_set(user = "My_User", password = "My_password")
+```
+
+to save your credentials in your machine. 
+
+To start writing your submission, in RStudio, go to File -> New File -> R Markdown -> From Template and choose "LatinR submission article". This will give you an example article that uses the correct template and has the important metadata. 
+
+When you finish writing your article, use `latinr::latinr_submit()`. By default, it will check that the metadata is in order, will render your rmarkdown file with anonymisation and upload it to the confference. If everything was in order, you will recieve an email. 
+
+As a last step, check that your submission is in the website with the correct information. 
+
