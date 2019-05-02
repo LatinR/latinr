@@ -30,10 +30,15 @@ latinr_default_user_get <- function() {
     # Second priority: check if only one user
     all_keys <- keyring::key_list()
     latinr_keys <- all_keys[all_keys[["service"]] == latinr_service(), ]
-    if (nrow(latinr_keys) == 1) {
-      user <- latinr_keys[["username"]]
+    
+    if (nrow(latinr_keys) == 0) {
+      stop("No users saved. Create an account at ", .latinr_url("latinr"), 
+           " and use 'latinr_password_set()' to save it.")
+    } else if (nrow(latinr_keys) > 1) {
+      stop("Multiple users present in keyring. Use 'latinr_default_user_set()' ", 
+           "to set the default user manually.")  
     } else {
-      stop("No default user set and multiple users present in keyring.")  
+      user <- latinr_keys[["username"]]
     }
   }
   
