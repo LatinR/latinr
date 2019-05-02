@@ -7,19 +7,19 @@
 \alias{latinr_password_set}
 \title{Password management}
 \usage{
-latinr_password_set(user, password, check_credentials = TRUE)
+latinr_password_set(user = NULL, password = NULL,
+  check_credentials = TRUE)
 
 latinr_password_get(user)
 
 latinr_password_remove(user)
 }
 \arguments{
-\item{user}{username.}
-
-\item{password}{password}
+\item{user, password}{username and password. If `NULL`, they will be asked
+interactively (recommended).}
 
 \item{check_credentials}{whether to validate credentials before saving them 
-(recommended)}
+(recommended).}
 }
 \description{
 Functions to save, get and remove latinr passwords.
@@ -28,7 +28,11 @@ Functions to save, get and remove latinr passwords.
 By default, `latinr_password_set()` will try to validate the credentials to 
 so that only valid credentials are saved. However, this needs an active 
 internet conection. Use `check_credentials = FALSE` if you are sure your 
-credentials are correct but don't have internet.
+credentials are correct but don't have internet. 
+
+The default `NULL` value for user and password is the recommended method for
+secuirity, as otherwise your credentials will be saved in plain text at the 
+command history.
 }
 \section{Functions}{
 \itemize{
