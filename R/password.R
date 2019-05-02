@@ -2,16 +2,21 @@
 #' 
 #' Functions to save, get and remove latinr passwords. 
 #' 
-#' @param user username. 
-#' @param password password
+#' @param user,password username and password. If `NULL`, they will be asked
+#' interactively (recommended).
 #' @param check_credentials whether to validate credentials before saving them 
-#' (recommended)
+#' (recommended).
 #' 
 #' @details 
 #' By default, `latinr_password_set()` will try to validate the credentials to 
 #' so that only valid credentials are saved. However, this needs an active 
 #' internet conection. Use `check_credentials = FALSE` if you are sure your 
 #' credentials are correct but don't have internet. 
+#' 
+#' The default `NULL` value for user and password is the recommended method for
+#' secuirity, as otherwise your credentials will be saved in plain text at the 
+#' command history.
+#' 
 #' @name latinr_password
 #' @aliases latinr_password_remove latinr_password_get latinr_password_set
 NULL
@@ -19,7 +24,18 @@ NULL
 
 #' @describeIn latinr_password Set a new user/password combination
 #' @export
-latinr_password_set <- function(user, password, check_credentials = TRUE) {
+latinr_password_set <- function(user = NULL, password = NULL, check_credentials = TRUE) {
+  if (is.null(user) || is.null(password)) {
+    user <- readline("User: ")
+    if (is.null(user) | user == "") {
+      stop("No user supplied.")
+    }
+    password <- getPass::getPass(msg = "Password: ", noblank = TRUE)
+    if (is.null(password)) {
+      stop("No password supplied.")
+    }
+  }
+  
   bypass_message <-  " or use `check_credentials = FALSE` to bypass login verification"
   ok_user <- !check_credentials
   if (!ok_user) {

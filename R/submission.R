@@ -57,7 +57,7 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
     file.show(pdf)
     pdf_ok <- readline("Send this file? (y/n) ")
     
-    if (tolower(pdf_pok) != "y") {
+    if (tolower(pdf_ok) != "y") {
       return(invisible(NULL))
     }
   }
