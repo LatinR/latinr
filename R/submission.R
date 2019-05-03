@@ -3,8 +3,8 @@
 #' @param rmd rmarkdown source file of the submission.
 #' @param pdf pdf file for submission. If `NULL`, the source file will be 
 #' rendered and used as file (recommended).
-#' @param user user used for uplad.
-#' @param check whether to ask for user confirmation (recommended).
+#' @param user user used for submission.
+#' @param check whether to ask for confirmation (recommended).
 #' 
 #' @details 
 #' It is highly recommended to use the latinr template that comes with 
@@ -13,7 +13,6 @@
 #' 
 #' It's also very important to check that your submission has gone through 
 #' correctly.
-#' 
 #' 
 #' @export
 latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"), 
@@ -29,6 +28,16 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   }
   
   metadata <- rmarkdown::yaml_front_matter(rmd)
+  
+  if (is.null(user)) {
+    user <- readline("User: ")
+    password <- getPass::getPass(msg = "Password: ", noblank = TRUE)
+    if (is.null(password)) {
+      stop("No password supplied.")
+    }
+  } else {
+    password <- latinr_password_get(user)
+  }
   
   if (isTRUE(check)) {
     print_form_data(metadata)
@@ -77,8 +86,6 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   form_data <- c(authors, metadata, list(upload90642 = httr::upload_file(pdf)))
   
   ### Submit form
-  password <- latinr_password_get(user)
-  
   url <- .latinr_url("latinr")
   message("Logging in")
   session <- rvest::html_session(url)

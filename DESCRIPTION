@@ -15,7 +15,8 @@ Imports:
     rmarkdown,
     knitr,
     httr,
-    keyring,
     rvest,
     getPass
+Suggests: 
+    keyring
 RoxygenNote: 6.1.1

@@ -13,9 +13,9 @@ latinr_submit(rmd = list.files(getwd(), pattern = ".Rmd"), pdf = NULL,
 \item{pdf}{pdf file for submission. If `NULL`, the source file will be 
 rendered and used as file (recommended).}
 
-\item{user}{user used for uplad.}
+\item{user}{user used for submission.}
 
-\item{check}{whether to ask for user confirmation (recommended).}
+\item{check}{whether to ask for confirmation (recommended).}
 }
 \description{
 Submit an article to LatinR

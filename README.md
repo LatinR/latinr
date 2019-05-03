@@ -12,11 +12,29 @@ latinr is a package that streamlines the submission process to the
 
 ## Installation
 
-You can install latinrfrom [GitHub](https://github.com/) with:
+You can install latinr from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("latinr/latinr")
+```
+
+Optionally, latinr can use the keyring package to safely store your
+credentials. In unix-based platforms, you might need to install
+`libsodium` manually. You can do this by typing one of the following
+commands in your terminal:
+
+  - `sudo apt install libsodiu.m-dev` in Debian, Ubuntu, and
+    derivatives.
+
+  - `yum install libsodium-devel` in Fedora, EPEL.
+
+  - `brew install libsodium` in OSX.
+
+And then:
+
+``` r
+install.packages("keyring")
 ```
 
 ## Usage

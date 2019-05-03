@@ -25,6 +25,7 @@ NULL
 #' @describeIn latinr_password Set a new user/password combination
 #' @export
 latinr_password_set <- function(user = NULL, password = NULL, check_credentials = TRUE) {
+  keyring_check()
   if (is.null(user) || is.null(password)) {
     user <- readline("User: ")
     if (is.null(user) | user == "") {
@@ -43,7 +44,9 @@ latinr_password_set <- function(user = NULL, password = NULL, check_credentials 
   }
   
   if (isTRUE(ok_user[["ok"]]) | !check_credentials) {
-    keyring::keyring_unlock()
+    if(keyring::default_backend()$name != "env") {
+      keyring::keyring_unlock()
+    }
     keyring::key_set_with_value(service = latinr_service(), 
                                 username = user,
                                 password = password)
@@ -56,7 +59,10 @@ latinr_password_set <- function(user = NULL, password = NULL, check_credentials 
 #' @describeIn latinr_password Get password for an user.
 #' @export
 latinr_password_get <- function(user) {
-  keyring::keyring_unlock()
+  keyring_check()
+  if(keyring::default_backend()$name != "env") {
+    keyring::keyring_unlock()
+  }
   keyring::key_get(service = latinr_service(), 
                    username = user)
 }
@@ -64,11 +70,10 @@ latinr_password_get <- function(user) {
 #' @describeIn latinr_password Remove an user/password combination.
 #' @export
 latinr_password_remove <- function(user) {
+  keyring_check()
   keyring::key_delete(service = latinr_service(), 
                       username = user)
 }
-
-
 
 
 latinr_password_check <- function(user, password) {
