@@ -26,4 +26,4 @@ latinr_service <- function() {
 
 .topics_number <- seq(281909, 281920)
 
-.types <- c("oral", "poster", "table")
+.types <- c("oral", "poster", "table", "lightning")

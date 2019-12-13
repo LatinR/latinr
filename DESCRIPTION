@@ -16,7 +16,10 @@ Imports:
     knitr,
     httr,
     rvest,
-    getPass
+    getPass,
+    shiny,
+    miniUI,
+    shinyjqui
 Suggests: 
     keyring
 RoxygenNote: 6.1.1
