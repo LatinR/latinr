@@ -4,8 +4,12 @@
 \alias{latinr_submit}
 \title{Submit an article to LatinR}
 \usage{
-latinr_submit(rmd = list.files(getwd(), pattern = ".Rmd"), pdf = NULL,
-  user = latinr_default_user_get(), check = TRUE)
+latinr_submit(
+  rmd = list.files(getwd(), pattern = ".Rmd"),
+  pdf = NULL,
+  user = latinr_default_user_get(),
+  check = TRUE
+)
 }
 \arguments{
 \item{rmd}{rmarkdown source file of the submission.}

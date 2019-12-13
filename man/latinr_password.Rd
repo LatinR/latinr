@@ -7,8 +7,7 @@
 \alias{latinr_password_set}
 \title{Password management}
 \usage{
-latinr_password_set(user = NULL, password = NULL,
-  check_credentials = TRUE)
+latinr_password_set(user = NULL, password = NULL, check_credentials = TRUE)
 
 latinr_password_get(user)
 

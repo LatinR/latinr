@@ -6,7 +6,7 @@
 \alias{latinr-package}
 \title{latinr: Submission to LatinR}
 \description{
-\if{html}{\figure{logo.png}{options: align='right'}}
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
 Facilitates creating submissions to the LatinR confference.
 }

@@ -4,8 +4,13 @@
 \alias{latinr_article}
 \title{R Markdown output format for submissions to LatinR}
 \usage{
-latinr_article(..., keep_tex = FALSE, highlight = "default",
-  citation_package = "none", latex_engine = "xelatex")
+latinr_article(
+  ...,
+  keep_tex = FALSE,
+  highlight = "default",
+  citation_package = "none",
+  latex_engine = "xelatex"
+)
 }
 \arguments{
 \item{...}{Arguments passed to \code{pdf_document()}.}
