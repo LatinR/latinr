@@ -8,7 +8,7 @@ check_latest_version <- function() {
   if (latest_version != this_version) {
     stop("Your version of latinr (", this_version, ") is not the most recent (", 
          latest_version, "). Please update with `devtools::install_github(\"latinr/latinr\")`")
-    
-    
   }
 }
+
+

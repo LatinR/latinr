@@ -85,7 +85,6 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
   }
   
   keywords <- metadata$keywords
-  null_keys <- unlist(lapply(keywords, is.null))
   
   if (sum(lengths(keywords)) < 3) {
     errors <- c(errors, "At least three keywords needed")
