@@ -115,7 +115,7 @@ $else$
 
 $for(authors)$
 \address{$authors.first_name$ $authors.last_name$\\
-$for(authors.Affiliation)$$authors.Affiliation$$sep$\\$endfor$\\
+$for(authors.affiliation)$$authors.affiliation$$sep$\\$endfor$\\
 $if(authors.corresponding)$\email{$authors.email$}$endif$}
 
 $endfor$

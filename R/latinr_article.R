@@ -26,14 +26,19 @@ latinr_article <- function(
 #' @export
 latinr_checks <- function(metadata, check_is_error = TRUE) {
   authors <- metadata$authors
-  required <- c("last_name", "email", "country", "Affiliation")
+  required <- c("last_name", "email", "country", "affiliation")
   
   missing_fields <- lapply(seq_along(authors), function(a) {
     person <- authors[[a]]
     len <- lengths(person[names(person) %in% required])
     nulls <- names(person)[names(person) %in% required][len == 0]
+    length_0 <- nchar(person[names(person) %in% required]) == 0
+    length_0 <- names(person)[names(person) %in% required][length_0]
+    
     missing_fields <- required[ !(required %in% names(person)) ]
-    missing_fields <- c(nulls, missing_fields)
+    
+  
+    missing_fields <- c(nulls, missing_fields, length_0)
     
     if (length(missing_fields) != 0) {
       paste0("Author ", a, ": missing ", knitr::combine_words(missing_fields))
@@ -46,13 +51,12 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
   errors <- errors[nchar(errors) != 0]
   
   
-  if (is.null(metadata$speaker)) {
+  if (is.null(metadata$speaker) || length(metadata$speaker) == 0) {
     errors <- c(errors, "Missing speaker")
   } else {
     if (length(metadata$speaker) > 1) {
       errors <- c(errors, "Only one author can be marked as speaker")
     }
-    
     
     if (metadata$speaker > length(authors)) {
       errors <- c(errors, paste0("Speaker cannot be '", metadata$speaker,
@@ -83,7 +87,6 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
   keywords <- metadata$keywords
   null_keys <- unlist(lapply(keywords, is.null))
   
-  
   if (sum(lengths(keywords)) < 3) {
     errors <- c(errors, "At least three keywords needed")
   }
@@ -102,7 +105,7 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
       cat(text)
     }
   } 
-  invisible(metadata)
+  invisible(errors)
 }
 
 

@@ -9,21 +9,21 @@ authors:
     last_name: Autor
     email: lncs@springer.com
     country: ar  # lista en latinr::latinr_countries()
-    Affiliation: "Princeton University"
+    affiliation: "Princeton University"
     url: "google.com"  # Optional 
     corresponding: true
   - first_name: Segundo 
     last_name: Autor
     email: lncs@springer.com
     country: ar
-    Affiliation: ["Princeton University", "Springer Heidelberg"]
+    affiliation: ["Princeton University", "Springer Heidelberg"]
     corresponding: false
 speaker: 1  # sólo un autor puede estar como speaker
 keywords: 
   - "Mínimo"
   - "tres"
   - "palabras clave"
-bibliography: latinRtest.bib
+bibliography: latinr_bibliography.bib
 biblio-style: apalike-es   
 output: 
     latinr::latinr_article:
@@ -32,6 +32,7 @@ params:
   check_is_error: FALSE
   submission: FALSE
 ---
+
 
 ```{r submission-checks, echo=FALSE, warning=TRUE}
 # Runs some basic checks in metadata. To disable, set check_is_error to FALSE
