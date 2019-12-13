@@ -54,6 +54,12 @@ To start writing your submission, in RStudio, go to File -\> New File
 This will give you an example article that uses the correct template and
 has the important metadata.
 
+Alternatively, you can use the UI wizard with `latinr::latinr_wizard()`.
+It will open up a shiny interface to help you populate your submission
+and then save the result into a file.
+
+![](man/figures/wizard.png)
+
 When you finish writing your article, use `latinr::latinr_submit()`. By
 default, it will check that the metadata is in order, will render your
 rmarkdown file with anonymisation and upload it to the confference. If
