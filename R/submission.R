@@ -20,6 +20,7 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
                           user = latinr_default_user_get(), 
                           check = TRUE) {
   check_latest_version()
+  check_submissions_open()
   
   if (length(rmd) == 0) {
     stop("No Rmd file selected")
