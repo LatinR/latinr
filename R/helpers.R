@@ -15,6 +15,6 @@ check_latest_version <- function() {
 check_submissions_open <- function() {
   submissions <- yaml::read_yaml("https://raw.githubusercontent.com/LatinR/latinr/master/submission_conditions.yaml")
  if (!submissions$open) {
-   stop("Latinr service is not open for submissions yet.")
+   stop("The latinr package is not ready for submissions yet.")
  }
 }

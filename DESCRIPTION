@@ -1,6 +1,6 @@
 Package: latinr
 Title: Submission to LatinR
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person(given = "Elio",
            family = "Campitelli",
@@ -25,4 +25,4 @@ Imports:
     sessioninfo
 Suggests: 
     keyring
-RoxygenNote: 7.0.0
+RoxygenNote: 7.0.2
