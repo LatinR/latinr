@@ -187,7 +187,7 @@ latinr_wizard <- function() {
         title = input$title,
         topics = as.integer(input$topics),
         authors = authors(),
-        speaker = as.integer(input$speaker),
+        presenter = as.integer(input$presenter),
         keywords = as.list(strsplit(input$keywords, ",")[[1]]),
         bibliography = "latinr_bibliography.bib",
         `biblio-style` = "apalike-es",
