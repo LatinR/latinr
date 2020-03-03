@@ -14,23 +14,23 @@ latinr_password_get(user)
 latinr_password_remove(user)
 }
 \arguments{
-\item{user, password}{username and password. If `NULL`, they will be asked
+\item{user, password}{username and password. If \code{NULL}, they will be asked
 interactively (recommended).}
 
-\item{check_credentials}{whether to validate credentials before saving them 
+\item{check_credentials}{whether to validate credentials before saving them
 (recommended).}
 }
 \description{
 Functions to save, get and remove latinr passwords.
 }
 \details{
-By default, `latinr_password_set()` will try to validate the credentials to 
-so that only valid credentials are saved. However, this needs an active 
-internet conection. Use `check_credentials = FALSE` if you are sure your 
-credentials are correct but don't have internet. 
+By default, \code{latinr_password_set()} will try to validate the credentials to
+so that only valid credentials are saved. However, this needs an active
+internet conection. Use \code{check_credentials = FALSE} if you are sure your
+credentials are correct but don't have internet.
 
-The default `NULL` value for user and password is the recommended method for
-secuirity, as otherwise your credentials will be saved in plain text at the 
+The default \code{NULL} value for user and password is the recommended method for
+secuirity, as otherwise your credentials will be saved in plain text in the
 command history.
 }
 \section{Functions}{

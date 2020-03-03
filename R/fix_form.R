@@ -1,7 +1,7 @@
 # from https://github.com/tidyverse/rvest/pull/132/commits/e1abd4b823be25ea5c8f581266c40bbf5cb4367a
 set_values <- function(form, ...) {
   new_values <- list(...)
-  
+  # browser()
   # check for valid names
   no_match <- setdiff(names(new_values), names(form$fields))
   if (length(no_match) > 0) {
@@ -36,7 +36,7 @@ set_values <- function(form, ...) {
 
 set_checkbox <- function(form, values) {
   idx <- which(unlist(lapply(form$fields, function(x) { x$name %in% names(values) })))
-  # browser()
+# browser()  
   for (i in unname(idx)) {
     if (!is.null(form$fields[[i]]$value) && (form$fields[[i]]$value %in% values))
       form$fields[[i]]$checked <- "true"
@@ -46,7 +46,7 @@ set_checkbox <- function(form, values) {
 
 set_radio <- function(form, values) {
   idx <- which(unlist(lapply(form$fields, function(x) { x$name %in% names(values) })))
-  # browser()
+
   for (i in unname(idx)) {
     if (!is.null(form$fields[[i]]$value)) {
       if (form$fields[[i]]$value %in% values)
@@ -60,6 +60,7 @@ set_radio <- function(form, values) {
 
 
 submit_request <- function(form, submit = NULL) {
+  # browser()
   submits <- Filter(function(x) {
     identical(tolower(x$type), "submit") | identical(tolower(x$type), "image")
   }, form$fields)
@@ -88,7 +89,7 @@ submit_request <- function(form, submit = NULL) {
   fields <- form$fields
   fields <- Filter(function(x) length(x$value) > 0, fields)
   fields <- Filter(function(x) is.null(x$type) || ((x$type != "radio") && (x$type != "checkbox")) || (!is.null(x$type) && (x$type %in% c("checkbox", "radio")) && !is.null(x$checked) && (x$checked == "true")), fields)
-  fields <- fields[setdiff(names(fields), other_submits)]
+  fields <- fields[!(names(fields) %in% other_submits)]
   
   values <- rvest::pluck(fields, "value")
   names(values) <- names(fields)
@@ -112,4 +113,21 @@ vpluck_with_default <- function(xs, i, default) {
     }
   }
   vapply(xs, extract, FUN.VALUE = default)
+}
+
+
+submit_form <- function (session, form, submit = NULL, ...)  {
+  request <- submit_request(form, submit)
+  url <- xml2::url_absolute(form$url, session$url)
+  if (request$method == "GET") {
+    rvest:::request_GET(session, url = url, query = request$values, 
+                ...)
+  }
+  else if (request$method == "POST") {
+    rvest:::request_POST(session, url = url, body = request$values, 
+                 encode = request$encode, ...)
+  }
+  else {
+    stop("Unknown method: ", request$method, call. = FALSE)
+  }
 }

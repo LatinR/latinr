@@ -6,11 +6,12 @@
     if (isTRUE(author$corresponding)) {
       author$corresponding <- "on"
     } else {
-      authors$corresponding <- "off"
+      author$corresponding <- NULL
     }
     
     names <- names(author) 
-    
+    names[names == "affiliation"] <- "Affiliation"
+    author[["affiliation"]] <- paste(author[["affiliation"]], collapse = " - ")
     names <- paste0(names, n)
     names(author) <- names
     

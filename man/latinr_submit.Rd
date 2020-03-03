@@ -14,7 +14,7 @@ latinr_submit(
 \arguments{
 \item{rmd}{rmarkdown source file of the submission.}
 
-\item{pdf}{pdf file for submission. If `NULL`, the source file will be 
+\item{pdf}{pdf file for submission. If \code{NULL}, the source file will be
 rendered and used as file (recommended).}
 
 \item{user}{user used for submission.}
@@ -25,10 +25,10 @@ rendered and used as file (recommended).}
 Submit an article to LatinR
 }
 \details{
-It is highly recommended to use the latinr template that comes with 
-this package and to use `pdf = NULL` as this will ensure that the publication
+It is highly recommended to use the latinr template that comes with
+this package and to use \code{pdf = NULL} as this will ensure that the publication
 adheres to the correct format and is appropriately anonymised.
 
-It's also very important to check that your submission has gone through 
+It's also very important to check that your submission has gone through
 correctly.
 }

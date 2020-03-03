@@ -1,12 +1,12 @@
 Package: latinr
 Title: Submission to LatinR
-Version: 0.0.0.9002
+Version: 0.0.0.9003
 Authors@R: 
     person(given = "Elio",
            family = "Campitelli",
            role = c("aut", "cre"),
            email = "elio.campitelli@fcen.cima.fcen.uba.ar")
-Description: Facilitates creating submissions to the LatinR confference.
+Description: Facilitates creation and submissiond of abstract for the LatinR conference.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -18,6 +18,7 @@ Imports:
     rvest,
     getPass,
     shiny,
+    xml2,
     miniUI,
     shinyjqui,
     shinyWidgets,
@@ -26,3 +27,4 @@ Imports:
 Suggests: 
     keyring
 RoxygenNote: 7.0.2
+Roxygen: list(markdown = TRUE)

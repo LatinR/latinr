@@ -110,7 +110,7 @@ latinr_wizard <- function() {
                                                )
                                              ),
                                              shiny::selectInput("lang", "Language", c("Spanish" = "spanish",
-                                                                                      "Portuguese" = "porguguese", 
+                                                                                      "Portuguese" = "portuguese", 
                                                                                       "English" = "english"), 
                                                                 width = "100%"),
                                              shiny::textInput("title", "Title", value = "", width = "100%"),
@@ -175,7 +175,7 @@ latinr_wizard <- function() {
         paste0("(", a, ") ", authors()[[a]]$first_name, " ", authors()[[a]]$last_name)
       }, "a")
       
-      shiny::selectInput("speaker", "Presenter", 
+      shiny::selectInput("presenter", "Presenter", 
                   choices = stats::setNames(seq_along(speaker_choices), speaker_choices),
                   width = "100%")
     })

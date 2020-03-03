@@ -1,24 +1,23 @@
 ---
-type: oral   #oral, poster, table
+type: poster   # List of types is available using latinr_types()
 language: spanish
 title: "Título"
-topics: [1, 2]
-# Para la lista de tópicos usá latinr::latinr_topics()
+topics: [1, 2] # List of topics is available using latinr::latinr_topics()
 authors:
   - first_name: Primer
     last_name: Autor
-    email: lncs@springer.com
-    country: ar  # lista en latinr::latinr_countries()
+    email: primero@somemail.com
+    country: ar  # List of countries available using latinr::latinr_countries()
     affiliation: "Princeton University"
     url: "google.com"  # Optional 
     corresponding: true
   - first_name: Segundo 
     last_name: Autor
-    email: lncs@springer.com
+    email: segundo@somemail.com
     country: ar
     affiliation: ["Princeton University", "Springer Heidelberg"]
     corresponding: false
-speaker: 1  # sólo un autor puede estar como speaker
+presenter: 1  # Only one author can be set as presenter
 keywords: 
   - "Mínimo"
   - "tres"

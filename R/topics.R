@@ -16,3 +16,9 @@ latinr_topics <- function() {
 latinr_countries <- function() {
   .countries
 }
+
+#' @describeIn latinr_lists List of possible types of presentation. 
+#' @export
+latinr_types <- function() {
+  .types
+}

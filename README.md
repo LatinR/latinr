@@ -40,11 +40,11 @@ install.packages("keyring")
 ## Usage
 
 If you are going to submit an article to LatinR, you will need to create
-an user at <https://easychair.org/conferences/?conf=latinr2019>. Then,
+an user at <https://easychair.org/conferences/?conf=latinr2020>. Then,
 use
 
 ``` r
-latinr:::latinr_password_set(user = "My_User", password = "My_password")
+latinr:::latinr_password_set()
 ```
 
 to save your credentials in your machine.
@@ -63,7 +63,7 @@ and then save the result into a file.
 When you finish writing your article, use `latinr::latinr_submit()`. By
 default, it will check that the metadata is in order, will render your
 rmarkdown file with anonymisation and upload it to the confference. If
-everything was in order, you will recieve an email.
+everything was in order, you will receive an email.
 
 As a last step, check that your submission is in the website with the
 correct information.

@@ -14,7 +14,7 @@
 #' credentials are correct but don't have internet. 
 #' 
 #' The default `NULL` value for user and password is the recommended method for
-#' secuirity, as otherwise your credentials will be saved in plain text at the 
+#' secuirity, as otherwise your credentials will be saved in plain text in the 
 #' command history.
 #' 
 #' @name latinr_password

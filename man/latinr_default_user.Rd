@@ -11,13 +11,13 @@ latinr_default_user_set(user = NULL)
 latinr_default_user_get()
 }
 \arguments{
-\item{user}{user to use as the default (`NULL` means no default user).}
+\item{user}{user to use as the default (\code{NULL} means no default user).}
 }
 \value{
-`latinr_default_user_get()` returns the default user set with `latinr_default_user_get()`
-or the user if there's only one user saved with `latinr_password_set()`.
+\code{latinr_default_user_get()} returns the default user set with \code{latinr_default_user_get()}
+or the user if there's only one user saved with \code{latinr_password_set()}.
 
-`latinr_default_user_get()` sets the default user (for the current session) 
+\code{latinr_default_user_get()} sets the default user (for the current session)
 and returns the supplied user invisibly.
 }
 \description{

@@ -19,6 +19,10 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
                           pdf = NULL,
                           user = latinr_default_user_get(), 
                           check = TRUE) {
+  disclaimer <- "----- IMPORTANT!! ----- \nAutomatic submission is still experimental. \nPlease be sure to manually check your submision at the end of the process and correct it if needed!"
+  
+  message(disclaimer)
+  
   check_latest_version()
   check_submissions_open()
   
@@ -74,19 +78,16 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
     }
   }
   
-  keep <- c("title", "keywords", "field44396")
-  metadata$field44396 <- switch(metadata$type,
-                                oral   = "162531",
-                                poster = "162532",
-                                table  = "162533")
+  keep <- c("title", "presenter", "keywords", "field47997")
+  metadata$field47997 <- .types_number[.types == metadata$type]
   
   authors <- .parse_authors(metadata$authors)
   metadata$keywords <- paste0(metadata$keywords, collapse = "\n")
   topics <- .parse_topics(metadata$topics)
   metadata <- metadata[names(metadata) %in% keep]
-  metadata <- c(metadata[keep[-3]], topics, metadata[keep[3]])
+  metadata <- c(metadata[keep[-4]], topics, metadata[keep[4]])
   
-  form_data <- c(authors, metadata, list(upload90642 = httr::upload_file(pdf)))
+  form_data <- c(authors, metadata, list(upload102820 = httr::upload_file(pdf)))
   
   ### Submit form
   url <- .latinr_url("latinr")
@@ -102,7 +103,7 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   if (inherits(try_session, "try-error")) {
     session <- suppressMessages(rvest::follow_link(session, "author"))
     a <- httr::parse_url(session$url)$query$a
-    session <- rvest::jump_to(session, paste0("https://easychair.org/conferences/submission_new.cgi", "?a=", a))
+    session <- rvest::jump_to(session, paste0("https://easychair.org/conferences/submission_new", "?a=", a))
   } else {
     session <- try_session
   }
@@ -113,14 +114,26 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   form_data$form <- submit_form
   submit_form <- do.call(set_values, form_data)
   
-  session <- suppressMessages(rvest::submit_form(session, submit_form))
+  
+  session <- suppressMessages(submit_form(session, submit_form))
   
   title <- rvest::html_text(rvest::html_nodes(session, "title")[[1]])
   
-  if (substr(title, 1, 21) != "LatinR2019 Submission") {
-    stop("There was an error, but I'm still not smart enought to know which :(!\n",
-         "Check your submission details and if you still get this error, submit manually", 
-         paste0(" at ", .latinr_url("latinr")))
+  if (substr(title, 1, 21) != "LatinR2020 Submission") {
+    errors <- rvest::html_text(rvest::html_node(session, "div.subcontent ul"))
+    
+    msg <- "There was an error with your submission"
+    
+    if (is.null(errors)) {
+      msg <- paste0(msg, ", but I'm still not smart enought to know which :(!\n",
+                    "Check your submission details and if you still get this error, submit manually", 
+                    paste0(" at ", .latinr_url("latinr")))
+    } else {
+      msg <- paste0(msg, ":\n", paste(errors, collapse = "\n"))
+    }
+    
+    stop(msg)
+
   } 
   message(title)
   

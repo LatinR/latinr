@@ -46,7 +46,7 @@ install.packages("keyring")
 If you are going to submit an article to LatinR, you will need to create an user at `r latinr:::.latinr_url("latinr")`. Then, use
 
 ```r
-latinr:::latinr_password_set(user = "My_User", password = "My_password")
+latinr:::latinr_password_set()
 ```
 
 to save your credentials in your machine. 
@@ -58,7 +58,7 @@ Alternatively, you can use the UI wizard with `latinr::latinr_wizard()`. It will
 ![](man/figures/wizard.png)
 
 
-When you finish writing your article, use `latinr::latinr_submit()`. By default, it will check that the metadata is in order, will render your rmarkdown file with anonymisation and upload it to the confference. If everything was in order, you will recieve an email. 
+When you finish writing your article, use `latinr::latinr_submit()`. By default, it will check that the metadata is in order, will render your rmarkdown file with anonymisation and upload it to the confference. If everything was in order, you will receive an email. 
 
 As a last step, check that your submission is in the website with the correct information. 
 

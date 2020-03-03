@@ -21,10 +21,15 @@ latinr_article <- function(
 #' 
 #' @param metadata yaml metadata.
 #' @param check_is_error whether to treat fails as errors or only warnings
-#' useful during developement).
+#' useful during development).
 #' 
 #' @export
 latinr_checks <- function(metadata, check_is_error = TRUE) {
+  
+  if (!is.null(metadata$speaker)) {
+    warning("The 'speaker' field has been renamed to 'presenter'.")
+  }
+  
   authors <- metadata$authors
   required <- c("last_name", "email", "country", "affiliation")
   
@@ -51,15 +56,15 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
   errors <- errors[nchar(errors) != 0]
   
   
-  if (is.null(metadata$speaker) || length(metadata$speaker) == 0) {
-    errors <- c(errors, "Missing speaker")
+  if (is.null(metadata$presenter) || length(metadata$presenter) == 0) {
+    errors <- c(errors, "Missing presenter")
   } else {
-    if (length(metadata$speaker) > 1) {
-      errors <- c(errors, "Only one author can be marked as speaker")
+    if (length(metadata$presenter) > 1) {
+      errors <- c(errors, "Only one author can be marked as presenter")
     }
     
-    if (metadata$speaker > length(authors)) {
-      errors <- c(errors, paste0("Speaker cannot be '", metadata$speaker,
+    if (metadata$presenter > length(authors)) {
+      errors <- c(errors, paste0("presenter cannot be '", metadata$presenter,
                                  "' if there are ", length(authors), " authors"))
     }
   }
