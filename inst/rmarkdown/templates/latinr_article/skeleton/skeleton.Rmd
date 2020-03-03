@@ -29,9 +29,12 @@ output:
       keep_tex: false
 params: 
   check_is_error: FALSE
-  submission: FALSE
 ---
 
+---
+params:
+  submission_2: TRUE
+---
 
 ```{r submission-checks, echo=FALSE, warning=TRUE}
 # Runs some basic checks in metadata. To disable, set check_is_error to FALSE

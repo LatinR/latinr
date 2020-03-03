@@ -4,16 +4,41 @@
 #' @inheritParams rmarkdown::pdf_document
 #'
 #' @export
-latinr_article <- function(
-  ..., keep_tex = FALSE, highlight = "default", citation_package = "none", 
-  latex_engine = "xelatex"
-) {
+latinr_article <- function( ..., keep_tex = FALSE, highlight = "default", citation_package = "none", 
+  latex_engine = "xelatex", submission = TRUE) {
   pdf_document_format(
-    "latinr_article", keep_tex = keep_tex, highlight = highlight,
+    "latinr_article", 
+    submission = submission,
+    keep_tex = keep_tex, highlight = highlight,
     citation_package = citation_package, latex_engine = latex_engine, 
     md_extensions = c("-autolink_bare_uris"),...
   )
 }
+
+pdf_document_format <- function(format, submission = TRUE, ...) {
+  
+  if (isTRUE(submission)) {
+    template <- find_resource(format, 'template_anom.tex')  
+  } else {
+    template <- find_resource(format, 'template_name.tex')  
+  }
+  
+  fmt <- rmarkdown::pdf_document(..., template = template)
+  fmt$inherits <- "pdf_document"
+  fmt
+}
+
+
+find_resource <- function(template, file = 'template.tex') {
+  res <- system.file(
+    "rmarkdown", "templates", template, "resources", file, package = "latinr"
+  )
+  if (res == "") stop(
+    "Couldn't find template file ", template, "/resources/", file, call. = FALSE
+  )
+  res
+}
+
 
 #' Checks that metadata is ok
 #' 
@@ -113,21 +138,3 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
 }
 
 
-pdf_document_format <- function(
-  format, template = find_resource(format, 'template.tex'), ...
-) {
-  fmt <- rmarkdown::pdf_document(..., template = template)
-  fmt$inherits <- "pdf_document"
-  fmt
-}
-
-
-find_resource <- function(template, file = 'template.tex') {
-  res <- system.file(
-    "rmarkdown", "templates", template, "resources", file, package = "latinr"
-  )
-  if (res == "") stop(
-    "Couldn't find template file ", template, "/resources/", file, call. = FALSE
-  )
-  res
-}

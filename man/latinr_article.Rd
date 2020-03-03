@@ -9,7 +9,8 @@ latinr_article(
   keep_tex = FALSE,
   highlight = "default",
   citation_package = "none",
-  latex_engine = "xelatex"
+  latex_engine = "xelatex",
+  submission = TRUE
 )
 }
 \arguments{

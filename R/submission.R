@@ -55,17 +55,21 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
     ok <- readline("Is the above information correct? (y/n) ")  
     if (tolower(ok) != "y") {
       return(invisible(NULL))
-    }
+    } 
   }
   
   message("Checking metadata")
   latinr_checks(metadata, check_is_error = TRUE)
   
-  message("Rendering file")
   if (is.null(pdf)) {
+    message("Rendering file")
+    
+    output_options <- metadata[["output"]][[1]]
+    output_options["submission"] <- TRUE
+    
     pdf <- rmarkdown::render(rmd, quiet = TRUE, 
-                             params = list(check_is_error = TRUE,
-                                           submission = TRUE))
+                             output_format = do.call(latinr_article, output_options),
+                             params = list(check_is_error = TRUE))
   }
   
   if (isTRUE(check)) {
@@ -114,7 +118,7 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   form_data$form <- submit_form
   submit_form <- do.call(set_values, form_data)
   
-  
+  stop("boknk!")
   session <- suppressMessages(submit_form(session, submit_form))
   
   title <- rvest::html_text(rvest::html_nodes(session, "title")[[1]])

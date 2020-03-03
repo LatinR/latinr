@@ -192,11 +192,11 @@ latinr_wizard <- function() {
         bibliography = "latinr_bibliography.bib",
         `biblio-style` = "apalike-es",
         output = list(`latinr::latinr_article` = list(
-          keep_tex = FALSE
+          keep_tex = FALSE,
+          submission = FALSE
         )),
         params = list(
-          check_is_error = FALSE,
-          submission = FALSE
+          check_is_error = FALSE
         )
       )
     })

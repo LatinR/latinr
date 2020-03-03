@@ -14,11 +14,8 @@
             pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$}}
 
 
-$if(params.submission)$
+
 \hypersetup{pdfauthor=Anónimo}
-$else$
-\hypersetup{pdfauthor={$for(authors)$$authors.first_name$ $authors.last_name$$sep$, $endfor$}}
-$endif$
 
 
 %\usepackage[hidelinks]{hyperref}
@@ -86,15 +83,8 @@ $endif$
 
 \title{$title$}
 
-$if(params.submission)$
+
 \author{Anónimo}
-$else$
-\author{
-$for(authors)$
-$authors.first_name$ $authors.last_name$ $sep$, 
-$endfor$
-}
-$endif$
 
 \maketitle
 
@@ -109,18 +99,6 @@ $endif$
 $body$
 
 
-$if(params.submission)$
-
-$else$
-
-$for(authors)$
-\address{$authors.first_name$ $authors.last_name$\\
-$for(authors.affiliation)$$authors.affiliation$$sep$\\$endfor$\\
-$if(authors.corresponding)$\email{$authors.email$}$endif$}
-
-$endfor$
-
-$endif$
 
 
 \end{article}
