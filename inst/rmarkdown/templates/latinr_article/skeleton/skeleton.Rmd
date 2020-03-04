@@ -27,14 +27,11 @@ biblio-style: apalike-es
 output: 
     latinr::latinr_article:
       keep_tex: false
+      submission: true
 params: 
   check_is_error: FALSE
 ---
 
----
-params:
-  submission_2: TRUE
----
 
 ```{r submission-checks, echo=FALSE, warning=TRUE}
 # Runs some basic checks in metadata. To disable, set check_is_error to FALSE
