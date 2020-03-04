@@ -114,7 +114,12 @@ latinr_wizard <- function() {
                                                                                       "English" = "english"), 
                                                                 width = "100%"),
                                              shiny::textInput("title", "Title", value = "", width = "100%"),
-                                             shiny::textInput("keywords", "Keywords", "", width = "100%"),
+                                             shiny::selectizeInput("keywords", "Keywords", c(),
+                                                                   multiple = TRUE, options = list(
+                                                                     'plugins' = list('remove_button'),
+                                                                     'create' = TRUE,
+                                                                     'persist' = FALSE)),
+                                             # shiny::textInput("keywords", "Keywords", "", width = "100%"),
                                              shiny::selectInput("topics", "Topics", topics, multiple = TRUE, width = "100%")
                              )
                            )
@@ -130,8 +135,8 @@ latinr_wizard <- function() {
   server <- function(input, output, session) {
     author_count <- shiny::reactiveVal(1)
     shiny::insertUI("#author", 
-             ui = author_infoui("author_1"),
-             where = "beforeEnd")
+                    ui = author_infoui("author_1"),
+                    where = "beforeEnd")
     shiny::callModule(author_info, "author_1")
     shinyjqui::jqui_sortable('#author', operation = "destroy")
     shinyjqui::jqui_sortable('#author', operation = "enable")
@@ -140,8 +145,8 @@ latinr_wizard <- function() {
       author_count(author_count() + 1)
       author_id <- paste0("author_", shiny::isolate(author_count()))
       shiny::insertUI("#author", 
-               ui = author_infoui(author_id),
-               where = "beforeEnd")
+                      ui = author_infoui(author_id),
+                      where = "beforeEnd")
       
       
       shiny::callModule(author_info, author_id)
@@ -176,8 +181,8 @@ latinr_wizard <- function() {
       }, "a")
       
       shiny::selectInput("presenter", "Presenter", 
-                  choices = stats::setNames(seq_along(speaker_choices), speaker_choices),
-                  width = "100%")
+                         choices = stats::setNames(seq_along(speaker_choices), speaker_choices),
+                         width = "100%")
     })
     
     metadata <- shiny::reactive({
@@ -188,7 +193,7 @@ latinr_wizard <- function() {
         topics = as.integer(input$topics),
         authors = authors(),
         presenter = as.integer(input$presenter),
-        keywords = as.list(strsplit(input$keywords, ",")[[1]]),
+        keywords = as.list(input$keywords),
         bibliography = "latinr_bibliography.bib",
         `biblio-style` = "apalike-es",
         output = list(`latinr::latinr_article` = list(
@@ -211,9 +216,9 @@ latinr_wizard <- function() {
         text <- shiny::p("Found the following errors:", shiny::tags$br(),
                          shiny::tags$ul(
                            shiny::tagList(
-                      lapply(errors, function(x) shiny::tags$li(x))
-                    )
-                  )
+                             lapply(errors, function(x) shiny::tags$li(x))
+                           )
+                         )
         )
         
         shiny::showNotification(text, type = "warning")
