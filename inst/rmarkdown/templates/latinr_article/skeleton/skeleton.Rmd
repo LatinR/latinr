@@ -6,7 +6,7 @@ topics: [1, 2] # List of topics is available using latinr::latinr_topics()
 authors:
   - first_name: Primer
     last_name: Autor
-    email: primero@somemail.com
+    email: primero@somemail.com   # One author's email has to match the email registered in EasyChair.
     country: ar  # List of countries available using latinr::latinr_countries()
     affiliation: "Princeton University"
     url: "google.com"  # Optional 

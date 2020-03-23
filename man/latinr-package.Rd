@@ -36,7 +36,8 @@ you and finally give you a valid yaml header that you can copy and paste into yo
 
 One you're happy with your article, it's time to submit it. First, if you haven't already, you'll
 need to create an account at https://easychair.org/account/signup and then save your
-login information using \code{\link[=latinr_password_set]{latinr_password_set()}}.
+login information using \code{\link[=latinr_password_set]{latinr_password_set()}}. The email associated with the account you are
+using to submit your article has to match the email of one of the authors.
 
 To submit your article use \code{\link[=latinr_submit]{latinr_submit()}}. By default, it will search for .Rmd files in the
 current working directory and if it finds only one, it process it. First, you will be shown the
