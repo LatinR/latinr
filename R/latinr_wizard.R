@@ -169,7 +169,7 @@ latinr_wizard <- function() {
              email = input[[paste0(a, "-email")]],
              country = input[[paste0(a, "-country")]],
              affiliation = input[[paste0(a, "-affiliation")]],
-             utl = input[[paste0(a, "-url")]],
+             url = input[[paste0(a, "-url")]],
              corresponding = input[[paste0(a, "-is_corresponding")]]
         )
       })
