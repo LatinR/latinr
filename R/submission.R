@@ -118,7 +118,6 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   form_data$form <- submit_form
   submit_form <- do.call(set_values, form_data)
   
-  stop("boknk!")
   session <- suppressMessages(submit_form(session, submit_form))
   
   title <- rvest::html_text(rvest::html_nodes(session, "title")[[1]])
