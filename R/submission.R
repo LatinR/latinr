@@ -139,15 +139,13 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
 
   } 
   message(title)
-  
-  submission <- httr::parse_url(session$url)$query$submission
+  submission <- httr::parse_url(session$url)$query$track
   submission <- strsplit(submission, ";", fixed = TRUE)[[1]]
-  a <- strsplit(submission[3], "=", fixed = TRUE)[[1]][2]
-  submission <-  submission[1]
-  submit_url <- paste0("https://easychair.org/conferences/submission_upload.cgi?",
-                       "submission=", submission, ";",
-                       "track=", .submission_track, ";",
-                       "a=", a)
+  a <- strsplit(submission[2], "=", fixed = TRUE)[[1]][2]
+  submission <- strsplit(submission[3], "=", fixed = TRUE)[[1]][2]
+  submit_url <- paste0("https://easychair.org/conferences/submission?",
+                       "a=", a, ";",
+                       "submission=", submission)
   message(paste0("Go to this url to check your submission:\n",
                  submit_url))
   
