@@ -30,7 +30,7 @@ devtools::install_github("latinr/latinr")
 
 Optionally, latinr can use the keyring package to safely store your credentials. In unix-based platforms, you might need to install `libsodium` manually. You can do this by typing one of the following commands in your terminal:
 
-* `sudo apt install libsodiu.m-dev` in Debian, Ubuntu, and derivatives. 
+* `sudo apt install libsodium-dev` in Debian, Ubuntu, and derivatives. 
 
 * `yum install libsodium-devel` in  Fedora, EPEL. 
 
