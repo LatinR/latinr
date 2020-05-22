@@ -36,6 +36,7 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   
   metadata <- rmarkdown::yaml_front_matter(rmd)
   
+  
   if (is.null(user)) {
     user <- readline("User: ")
     password <- getPass::getPass(msg = "Password: ", noblank = TRUE)
@@ -82,6 +83,7 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
     }
   }
   
+  n_authors <- length(metadata$authors)
   keep <- c("title", "presenter", "keywords", "field47997")
   metadata$field47997 <- .types_number[.types == metadata$type]
   
@@ -102,19 +104,16 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
                                   name = user, 
                                   password = password)
   session <- suppressMessages(rvest::submit_form(session, login_form))
-  try_session <- try(rvest::follow_link(session, "enter as an author"), silent = TRUE)
-  
-  if (inherits(try_session, "try-error")) {
-    session <- suppressMessages(rvest::follow_link(session, "author"))
-    a <- httr::parse_url(session$url)$query$a
-    session <- rvest::jump_to(session, paste0("https://easychair.org/conferences/submission_new", "?a=", a))
-  } else {
-    session <- try_session
-  }
+  session <- suppressMessages(rvest::follow_link(session, "author"))
+  a <- httr::parse_url(session$url)$query$a
+  session <- rvest::jump_to(session, paste0("https://easychair.org/conferences/submission_new", "?a=", a))
+
   
   submit_form <- rvest::html_form(session)[[1]]
   
   message("Submitting")
+  submit_form <- add_authors(submit_form, n_authors)
+  
   form_data$form <- submit_form
   submit_form <- do.call(set_values, form_data)
   
@@ -141,15 +140,50 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   message(title)
   submission <- httr::parse_url(session$url)$query$track
   submission <- strsplit(submission, ";", fixed = TRUE)[[1]]
-  a <- strsplit(submission[2], "=", fixed = TRUE)[[1]][2]
-  submission <- strsplit(submission[3], "=", fixed = TRUE)[[1]][2]
+  a <- submission[grepl("a=", submission)]
+  a <- strsplit(a, "=", fixed = TRUE)[[1]][2]
+  
+  sub <- submission[grepl("submission=", submission)]
+  sub <- strsplit(sub, "=", fixed = TRUE)[[1]][2]
+  
   submit_url <- paste0("https://easychair.org/conferences/submission?",
                        "a=", a, ";",
-                       "submission=", submission)
+                       "submission=", sub)
   message(paste0("Go to this url to check your submission:\n",
                  submit_url))
   
   return(invisible(submit_url))
   
   message("Submitted")
+}
+
+
+add_authors <- function(form, n_authors) {
+  new_form <- form
+  if (n_authors < 4) {
+    return(form)
+  }
+  
+  fields <- c("first_name", "last_name", "email", "country", "url", "Affiliation", "corresponding")
+  based_on <- paste0(fields, "1")
+  # Agrega autores mayores a 3
+  for (i in seq_len(n_authors - 3) + 3) {
+    new_fields <- paste0(fields, i)
+  
+    for (f in seq_along(new_fields)) {
+      new_form <- add_field(new_form, new_fields[f], based_on[f])
+      
+    }
+
+  }
+  return(new_form)
+}
+
+
+add_field <- function(form, new_name, based_on) {
+  new_form <- form
+  new_form$fields[[new_name]] <- new_form$fields[[based_on]]
+  new_form$fields[[new_name]]$name <- new_name
+  
+  return(new_form)
 }
