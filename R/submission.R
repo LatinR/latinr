@@ -138,23 +138,9 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
 
   } 
   message(title)
-  submission <- httr::parse_url(session$url)$query$track
-  submission <- strsplit(submission, ";", fixed = TRUE)[[1]]
-  a <- submission[grepl("a=", submission)]
-  a <- strsplit(a, "=", fixed = TRUE)[[1]][2]
+  message("Submission successful! Check your email for confirmation.")
+  return(invisible(TRUE))
   
-  sub <- submission[grepl("submission=", submission)]
-  sub <- strsplit(sub, "=", fixed = TRUE)[[1]][2]
-  
-  submit_url <- paste0("https://easychair.org/conferences/submission?",
-                       "a=", a, ";",
-                       "submission=", sub)
-  message(paste0("Go to this url to check your submission:\n",
-                 submit_url))
-  
-  return(invisible(submit_url))
-  
-  message("Submitted")
 }
 
 
