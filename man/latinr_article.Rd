@@ -27,6 +27,8 @@ or \code{biblatex}. Use \code{none} if neither package is to be used.}
 
 \item{latex_engine}{LaTeX engine for producing PDF output. Options are
 "pdflatex", "lualatex", and "xelatex".}
+
+\item{submission}{whether this is a submission or not.}
 }
 \description{
 R Markdown output format for submissions to LatinR
