@@ -23,7 +23,8 @@ Imports:
     shinyjqui,
     shinyWidgets,
     yaml,
-    sessioninfo
+    sessioninfo,
+    magick
 Suggests: 
     keyring
 RoxygenNote: 7.0.2
