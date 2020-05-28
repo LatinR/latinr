@@ -2,6 +2,7 @@
 #' 
 #' 
 #' @inheritParams rmarkdown::pdf_document
+#' @param submission whether this is a submission or not. 
 #'
 #' @export
 latinr_article <- function( ..., keep_tex = FALSE, highlight = "default", citation_package = "none", 
@@ -23,7 +24,7 @@ pdf_document_format <- function(format, submission = TRUE, ...) {
     template <- find_resource(format, 'template_name.tex')  
   }
   
-  fmt <- rmarkdown::pdf_document(..., template = template)
+  fmt <- bookdown::pdf_document2(..., template = template)
   fmt$inherits <- "pdf_document"
   fmt
 }

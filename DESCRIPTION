@@ -24,8 +24,9 @@ Imports:
     shinyWidgets,
     yaml,
     sessioninfo,
-    magick
+    magick,
+    bookdown
 Suggests: 
     keyring
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
