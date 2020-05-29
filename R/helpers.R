@@ -2,12 +2,23 @@ check_latest_version <- function() {
   description <- readLines("https://raw.githubusercontent.com/LatinR/latinr/master/DESCRIPTION")
   latest_version <- description[grepl("Version:", description)]
   latest_version <- gsub("Version: ", "", latest_version)
+  pkg_info <- sessioninfo::package_info("latinr", dependencies = FALSE)
   
-  this_version <- sessioninfo::package_info("latinr", dependencies = FALSE)$ondiskversion
+  this_version_loaded <- pkg_info$loadedversion
+  this_version_disk <- pkg_info$ondiskversion
   
-  if (latest_version != this_version) {
-    stop("Your version of latinr (", this_version, ") is not the most recent (", 
-         latest_version, "). Please update with `devtools::install_github(\"latinr/latinr\")`.")
+  
+  
+  if (latest_version != this_version_disk) {
+    stop("Your version of latinr (", this_version_disk, ") is not the most recent (", 
+         latest_version, "). Please update with `devtools::install_github(\"latinr/latinr\")`",
+         "and restart R (In RStudio: Session -> Restart R).")
+  } 
+  
+  if (latest_version != this_version_loaded) {
+    stop("Your loaded version of latinr (", this_version_loaded, ") is not the most recent (", 
+         latest_version, "). Please restart R (In RStudio: Session -> Restart R).")
+    
   }
 }
 
