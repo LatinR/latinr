@@ -104,11 +104,10 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
                                   name = user, 
                                   password = password)
   session <- suppressMessages(rvest::submit_form(session, login_form))
-  session <- suppressMessages(rvest::follow_link(session, "author"))
-  a <- httr::parse_url(session$url)$query$a
-  session <- rvest::jump_to(session, paste0("https://easychair.org/conferences/submission_new", "?a=", a))
-
   
+  # TODO unhardoce this url
+  session <- rvest::jump_to(session, "https://easychair.org/my/login_author?conference=250761") 
+
   submit_form <- rvest::html_form(session)[[1]]
   
   message("Submitting")
