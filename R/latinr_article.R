@@ -5,22 +5,28 @@
 #'
 #' @export
 latinr_article <- function( ..., keep_tex = FALSE, highlight = "default", citation_package = "none", 
-  latex_engine = "xelatex", submission = TRUE) {
+                            latex_engine = "xelatex", submission = TRUE, author_bottom = TRUE) {
   pdf_document_format(
     "latinr_article", 
     submission = submission,
+    author_bottom = author_bottom, 
     keep_tex = keep_tex, highlight = highlight,
     citation_package = citation_package, latex_engine = latex_engine, 
     md_extensions = c("-autolink_bare_uris"),...
   )
 }
 
-pdf_document_format <- function(format, submission = TRUE, ...) {
+pdf_document_format <- function(format, submission = TRUE, author_bottom = TRUE, ...) {
   
   if (isTRUE(submission)) {
     template <- find_resource(format, 'template_anom.tex')  
   } else {
-    template <- find_resource(format, 'template_name.tex')  
+    if (isTRUE(author_bottom)) {
+      template <- find_resource(format, 'template_name.tex')    
+    } else {
+      template <- find_resource(format, 'template_name_no-bottom.tex')    
+    }
+    
   }
   
   fmt <- rmarkdown::pdf_document(..., template = template)
