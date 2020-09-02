@@ -269,7 +269,10 @@ latinr_wizard <- function() {
       utils::file.edit(file)
     })
     
+    shiny::observeEvent(input$cancel, shiny::stopApp())
+    
   }
   
-  shiny::runGadget(shiny::shinyApp(ui, server), viewer = shiny::dialogViewer("", width = 800, height = 800))
+  shiny::runGadget(ui, server = server, stopOnCancel = FALSE,
+                   viewer = shiny::dialogViewer("", width = 800, height = 800))
 }
