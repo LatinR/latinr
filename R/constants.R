@@ -7,7 +7,7 @@ latinr_service <- function() {
   switch(what,
          verify = "https://easychair.org/account/verify",
          login = "https://easychair.org/account/signin",
-         latinr = "https://easychair.org/conferences/?conf=latinr2020",
+         latinr = "https://easychair.org/conferences/?conf=latinr2021",
          singup = "https://easychair.org/account/signup",
          submit = "https://easychair.org/conferences/submission_new_z.cgi",
          stop("Unrecognised what")
