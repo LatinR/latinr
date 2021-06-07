@@ -4,7 +4,7 @@
 #' @inheritParams rmarkdown::pdf_document
 #'
 #' @export
-latinr_article <- function( ..., keep_tex = FALSE, highlight = "default", citation_package = "none", 
+latinr_article <- function( ..., keep_tex = FALSE, highlight = "default", citation_package = "default", 
                             latex_engine = "xelatex", submission = TRUE, author_bottom = TRUE) {
   pdf_document_format(
     "latinr_article", 
