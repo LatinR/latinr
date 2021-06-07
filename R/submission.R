@@ -133,7 +133,6 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   
   submit_form <- rvest::html_form(session)[[1]]
   
-  browser()
   message("Submitting")
   submit_form <- add_authors(submit_form, n_authors)
   form_data$form <- submit_form
