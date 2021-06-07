@@ -1,14 +1,17 @@
 #' R Markdown output format for submissions to LatinR
 #' 
 #' 
-#' @inheritParams rmarkdown::pdf_document
+#' @inheritParams  rmarkdown::pdf_document
+#' @param anonymise whether to anonymise the PDF
+#' @param author_bottom whether to add author information at the bottom of the 
+#' page.
 #'
 #' @export
 latinr_article <- function( ..., keep_tex = FALSE, highlight = "default", citation_package = "default", 
-                            latex_engine = "xelatex", submission = TRUE, author_bottom = TRUE) {
+                            latex_engine = "xelatex", anonymise = TRUE, author_bottom = FALSE) {
   pdf_document_format(
     "latinr_article", 
-    submission = submission,
+    submission = anonymise,
     author_bottom = author_bottom, 
     keep_tex = keep_tex, highlight = highlight,
     citation_package = citation_package, latex_engine = latex_engine, 

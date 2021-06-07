@@ -1,6 +1,6 @@
 Package: latinr
 Title: Submission to LatinR
-Version: 0.0.0.9009
+Version: 0.0.0.9010
 Authors@R: 
     person(given = "Elio",
            family = "Campitelli",

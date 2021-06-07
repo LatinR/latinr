@@ -10,8 +10,8 @@ latinr_article(
   highlight = "default",
   citation_package = "default",
   latex_engine = "xelatex",
-  submission = TRUE,
-  author_bottom = TRUE
+  anonymise = TRUE,
+  author_bottom = FALSE
 )
 }
 \arguments{
@@ -30,6 +30,11 @@ which means citations will be processed via the command
 
 \item{latex_engine}{LaTeX engine for producing PDF output. Options are
 "pdflatex", "lualatex", "xelatex" and "tectonic".}
+
+\item{anonymise}{whether to anonymise the PDF}
+
+\item{author_bottom}{whether to add author information at the bottom of the
+page.}
 }
 \description{
 R Markdown output format for submissions to LatinR

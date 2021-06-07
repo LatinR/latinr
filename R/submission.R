@@ -66,7 +66,7 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
     message("Rendering file")
     
     output_options <- metadata[["output"]][[1]]
-    output_options["submission"] <- TRUE
+    output_options["anonymise"] <- TRUE
     
     pdf <- rmarkdown::render(rmd, quiet = TRUE, 
                              output_format = do.call(latinr_article, output_options),
