@@ -73,6 +73,15 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
                              params = list(check_is_error = TRUE))
   }
   
+  # uses magick to count number of pages because pdftools requires
+  # installing a system library and is a pita whereas magick comes
+  # preinstalled in most linux distros. 
+  n_pages <- length(magick::image_read(pdf))
+  if (n_pages > 2) {
+    stop("The file has more than the accepted numebr of pages (2).")
+  }
+  
+  
   if (isTRUE(check)) {
     pdf_open <- readline("Press (enter) to check your submission file. ")
     file.show(pdf)

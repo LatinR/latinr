@@ -1,6 +1,6 @@
 Package: latinr
 Title: Submission to LatinR
-Version: 0.0.0.9008
+Version: 0.0.0.9009
 Authors@R: 
     person(given = "Elio",
            family = "Campitelli",
@@ -23,7 +23,7 @@ Imports:
     shinyjqui,
     shinyWidgets,
     yaml,
-    sessioninfo
+    magick
 Suggests: 
     keyring
 RoxygenNote: 7.1.1
