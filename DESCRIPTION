@@ -1,6 +1,6 @@
 Package: latinr
 Title: Submission to LatinR
-Version: 0.0.0.9007
+Version: 0.0.0.9008
 Authors@R: 
     person(given = "Elio",
            family = "Campitelli",
@@ -26,5 +26,5 @@ Imports:
     sessioninfo
 Suggests: 
     keyring
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)

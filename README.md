@@ -4,7 +4,6 @@
 # latinr <img src="man/figures/logo.png" align="right"/>
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 latinr is a package that streamlines the submission process to the
@@ -24,11 +23,11 @@ credentials. In unix-based platforms, you might need to install
 `libsodium` manually. You can do this by typing one of the following
 commands in your terminal:
 
-  - `sudo apt install libsodium-dev` in Debian, Ubuntu, and derivatives.
+-   `sudo apt install libsodium-dev` in Debian, Ubuntu, and derivatives.
 
-  - `yum install libsodium-devel` in Fedora, EPEL.
+-   `yum install libsodium-devel` in Fedora, EPEL.
 
-  - `brew install libsodium` in OSX.
+-   `brew install libsodium` in OSX.
 
 And then:
 
@@ -39,7 +38,7 @@ install.packages("keyring")
 ## Usage
 
 If you are going to submit an article to LatinR, you will need to create
-an user at <https://easychair.org/conferences/?conf=latinr2020>. Then,
+an user at <https://easychair.org/conferences/?conf=latinr2021>. Then,
 use
 
 ``` r
@@ -48,10 +47,10 @@ latinr:::latinr_password_set()
 
 to save your credentials in your machine.
 
-To start writing your submission, in RStudio, go to File -\> New File
--\> R Markdown -\> From Template and choose “LatinR submission article”.
-This will give you an example article that uses the correct template and
-has the important metadata.
+To start writing your submission, in RStudio, go to File -&gt; New File
+-&gt; R Markdown -&gt; From Template and choose “LatinR submission
+article”. This will give you an example article that uses the correct
+template and has the important metadata.
 
 Alternatively, you can use the UI wizard with `latinr::latinr_wizard()`.
 It will open up a shiny interface to help you populate your submission

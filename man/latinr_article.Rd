@@ -8,9 +8,10 @@ latinr_article(
   ...,
   keep_tex = FALSE,
   highlight = "default",
-  citation_package = "none",
+  citation_package = "default",
   latex_engine = "xelatex",
-  submission = TRUE
+  submission = TRUE,
+  author_bottom = TRUE
 )
 }
 \arguments{
@@ -23,10 +24,12 @@ latinr_article(
 "zenburn", and "haddock". Pass \code{NULL} to prevent syntax highlighting.}
 
 \item{citation_package}{The LaTeX package to process citations, \code{natbib}
-or \code{biblatex}. Use \code{none} if neither package is to be used.}
+or \code{biblatex}. Use \code{default} if neither package is to be used,
+which means citations will be processed via the command
+\command{pandoc-citeproc}.}
 
 \item{latex_engine}{LaTeX engine for producing PDF output. Options are
-"pdflatex", "lualatex", and "xelatex".}
+"pdflatex", "lualatex", "xelatex" and "tectonic".}
 }
 \description{
 R Markdown output format for submissions to LatinR

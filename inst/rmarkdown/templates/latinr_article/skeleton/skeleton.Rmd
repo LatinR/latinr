@@ -2,7 +2,6 @@
 type: poster   # List of types is available using latinr_types()
 language: spanish
 title: "Título"
-topics: [1, 2] # List of topics is available using latinr::latinr_topics()
 authors:
   - first_name: Primer
     last_name: Autor
@@ -17,11 +16,12 @@ authors:
     country: ar
     affiliation: ["Princeton University", "Springer Heidelberg"]
     corresponding: false
-presenter: 1  # Only one author can be set as presenter
 keywords: 
   - "Mínimo"
   - "tres"
   - "palabras clave"
+abstract: |
+  Abstract goes here!
 bibliography: latinr_bibliography.bib
 biblio-style: apalike-es   
 output: 

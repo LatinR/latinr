@@ -84,43 +84,61 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
   }
   
   n_authors <- length(metadata$authors)
-  keep <- c("title", "presenter", "keywords", "field47997")
-  metadata$field47997 <- .types_number[.types == metadata$type]
+  keep <- c("title", "keywords", "abstract")
+  # No more type?
+  # metadata$field47997 <- .types_number[.types == metadata$type]
   
   authors <- .parse_authors(metadata$authors)
   metadata$keywords <- paste0(metadata$keywords, collapse = "\n")
-  topics <- .parse_topics(metadata$topics)
   metadata <- metadata[names(metadata) %in% keep]
-  metadata <- c(metadata[keep[-4]], topics, metadata[keep[4]])
+  names(metadata)[names(metadata) == "abstract"] <- "abstr"  # Name on the form
   
-  form_data <- c(authors, metadata, list(upload102820 = httr::upload_file(pdf)))
+  form_data <- c(authors, metadata)
   
   ### Submit form
   url <- .latinr_url("latinr")
   message("Logging in")
-  session <- rvest::html_session(url)
+  session <- rvest::session(url)
   login_form <- rvest::html_form(session)[[1]]
-  login_form <- rvest::set_values(login_form, 
-                                  name = user, 
-                                  password = password)
-  session <- suppressMessages(rvest::submit_form(session, login_form))
+  login_form <- rvest::html_form_set(login_form, 
+                                     name = user, 
+                                     password = password)
+  session <- suppressMessages(rvest::session_submit(session, login_form))
   
-  # TODO unhardoce this url
-  session <- rvest::jump_to(session, "https://easychair.org/my/login_author?conference=250761") 
-
+  
+  
+  # If previously submitted
+  session_try <- try(rvest::session_follow_link(session, "author"), silent = TRUE)
+  if (inherits(session_try, "try-error")) {
+    session <- rvest::session_follow_link(session, "make a new submission") 
+  } else {
+    session <- session_try
+    menu <- rvest::html_element(session, css = "#menu1")
+    
+    click <- rvest::html_attr(menu, "onclick")
+    
+    click <- gsub("Menu.followLink\\('menu1','", "", click)
+    click <- sub("'\\)", "", click)
+    session <- rvest::session_jump_to(session, paste0("https://easychair.org", click))
+  }
+  
   submit_form <- rvest::html_form(session)[[1]]
   
+  browser()
   message("Submitting")
   submit_form <- add_authors(submit_form, n_authors)
-  
   form_data$form <- submit_form
-  submit_form <- do.call(set_values, form_data)
+  submit_form <- do.call(rvest::html_form_set, form_data)
   
-  session <- suppressMessages(submit_form(session, submit_form))
+  # Workaround because rvest doesn't do file upload correctly.
+  submit_form <- rvest:::submission_build(submit_form, NULL)
+  submit_form$values$upload114286 <- httr::upload_file(pdf)
+  resp <- suppressMessages(rvest:::submission_submit(submit_form, session$config, handle = session$handle))
+  session <- rvest:::session_set_response(session, resp)
   
   title <- rvest::html_text(rvest::html_nodes(session, "title")[[1]])
   
-  if (substr(title, 1, 21) != "LatinR2020 Submission") {
+  if (substr(title, 1, 21) != "LatinR2021 Submission") {
     errors <- rvest::html_text(rvest::html_node(session, "div.subcontent ul"))
     
     msg <- "There was an error with your submission"
@@ -134,7 +152,7 @@ latinr_submit <- function(rmd = list.files(getwd(), pattern = ".Rmd"),
     }
     
     stop(msg)
-
+    
   } 
   message(title)
   message("Submission successful! Check your email for confirmation.")
@@ -154,12 +172,12 @@ add_authors <- function(form, n_authors) {
   # Agrega autores mayores a 3
   for (i in seq_len(n_authors - 3) + 3) {
     new_fields <- paste0(fields, i)
-  
+    
     for (f in seq_along(new_fields)) {
       new_form <- add_field(new_form, new_fields[f], based_on[f])
       
     }
-
+    
   }
   return(new_form)
 }

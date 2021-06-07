@@ -56,11 +56,6 @@ find_resource <- function(template, file = 'template.tex') {
 #' 
 #' @export
 latinr_checks <- function(metadata, check_is_error = TRUE) {
-  
-  if (!is.null(metadata$speaker)) {
-    warning("The 'speaker' field has been renamed to 'presenter'.")
-  }
-  
   authors <- metadata$authors
   required <- c("last_name", "email", "country", "affiliation")
   
@@ -86,20 +81,7 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
   errors <- unlist(missing_fields)
   errors <- errors[nchar(errors) != 0]
   
-  
-  if (is.null(metadata$presenter) || length(metadata$presenter) == 0) {
-    errors <- c(errors, "Missing presenter")
-  } else {
-    if (length(metadata$presenter) > 1) {
-      errors <- c(errors, "Only one author can be marked as presenter")
-    }
-    
-    if (metadata$presenter > length(authors)) {
-      errors <- c(errors, paste0("presenter cannot be '", metadata$presenter,
-                                 "' if there are ", length(authors), " authors"))
-    }
-  }
- 
+
   
   n_correspondence <- Reduce("+", lapply(authors, function(a) isTRUE(a$corresponding)))
   
@@ -111,14 +93,6 @@ latinr_checks <- function(metadata, check_is_error = TRUE) {
     errors <- c(errors, "Missing title")
   }
   
-  if (is.null(metadata$topics)) {
-    errors <- c(errors, "Missing topics")
-  } else {
-    if (any(metadata$topics > length(.topics))) {
-      errors <- c(errors, paste0("Invalid topic detected, must be a number between 1 and ",
-                                 length(.topics)))
-    }
-  }
   
   keywords <- metadata$keywords
   
