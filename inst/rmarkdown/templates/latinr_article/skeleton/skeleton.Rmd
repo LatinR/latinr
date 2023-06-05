@@ -1,6 +1,7 @@
 ---
 type: poster   # List of types is available using latinr_types()
 language: spanish
+year: '`r format(Sys.Date(), "%Y")`' 
 title: "Título"
 authors:
   - first_name: Primer
