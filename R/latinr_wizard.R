@@ -198,7 +198,7 @@ latinr_wizard <- function() {
         `biblio-style` = "apalike-es",
         output = list(`latinr::latinr_article` = list(
           keep_tex = FALSE,
-          submission = FALSE
+          anonymise = FALSE
         )),
         params = list(
           check_is_error = FALSE
@@ -239,11 +239,11 @@ latinr_wizard <- function() {
         file <- paste0(file, ".Rmd")
       } 
       
-      skeleton <- system.file("inst/rmarkdown/templates/latinr_article/skeleton/",
+      skeleton <- system.file("rmarkdown/templates/latinr_article/skeleton/",
                               "skeleton.Rmd", package = "latinr", mustWork = TRUE)
-      bib <- system.file("inst/rmarkdown/templates/latinr_article/skeleton/",
+      bib <- system.file("rmarkdown/templates/latinr_article/skeleton/",
                          "latinr_bibliography.bib", package = "latinr", mustWork = TRUE)
-      style <-  system.file("inst/rmarkdown/templates/latinr_article/skeleton/",
+      style <-  system.file("rmarkdown/templates/latinr_article/skeleton/",
                             "RJournal.sty", package = "latinr", mustWork = TRUE)
       
       lines <- paste0(yaml(), "\n\n",
