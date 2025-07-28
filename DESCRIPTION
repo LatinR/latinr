@@ -24,7 +24,8 @@ Imports:
     shinyWidgets,
     yaml,
     magick,
-    sessioninfo
+    sessioninfo,
+    rlang
 Suggests: 
     keyring
 RoxygenNote: 7.1.1

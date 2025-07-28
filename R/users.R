@@ -28,7 +28,7 @@ latinr_default_user_get <- function() {
   
   if (is.null(user)) {
     # Second priority: check if only one user
-    keyring_check()
+    rlang::check_installed("keyring", "latinr_default_user_get()")
     all_keys <- keyring::key_list()
     latinr_keys <- all_keys[all_keys[["service"]] == latinr_service(), ]
     
@@ -45,14 +45,4 @@ latinr_default_user_get <- function() {
   }
   
   return(user)
-}
-
-
-keyring_check <- function() {
-  has_keyring <- requireNamespace("keyring", quietly = TRUE)
-  if (!has_keyring) {
-    stop("Credentials management needs the keyring package.\n", 
-         'You can install it with `install.packages("keyring")`')
-  }
-  return(invisible(has_keyring))
 }
